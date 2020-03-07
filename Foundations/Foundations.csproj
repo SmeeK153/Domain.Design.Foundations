@@ -6,7 +6,10 @@
     <Nullable>enable</Nullable>
     <IsPackable>true</IsPackable>
     <OutputType>library</OutputType>
-    <Version>0.0.3</Version>
+    <PackageId>DomainDesignFoundations</PackageId>
+    <Version>0.0.6</Version>
+    <Authors></Authors>
+    <Company></Company>
   </PropertyGroup>
   <ItemGroup>
     <Content Include="Core\Entity.cs" />
