@@ -1,4 +1,4 @@
-name: Publish
+name: nuget 
 on:
   push:
     branches: [ master ]
