@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <LangVersion>8.0</LangVersion>
+    <Nullable>enable</Nullable>
+    <IsPackable>true</IsPackable>
+    <OutputType>library</OutputType>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="Core\Entity.cs" />
+    <Content Include="Core\ValueObject.cs" />
+    <Content Include="Core\Enumeration.cs" />
+    <Content Include="Events\Request.cs" />
+    <Content Include="Exceptions\DomainException.cs" />
+    <Content Include="Events\Query.cs" />
+    <Content Include="Events\IEventPublisher.cs" />
+    <Content Include="Events\Notification.cs" />
+    <Content Include="Core\IRepository.cs" />
+  </ItemGroup>
+</Project>
