@@ -6,8 +6,8 @@
     <Nullable>enable</Nullable>
     <IsPackable>true</IsPackable>
     <OutputType>library</OutputType>
-    <PackageId>DomainDesignFoundations</PackageId>
-    <Version>0.0.7</Version>
+    <PackageId>Domain.Design.Foundations</PackageId>
+    <Version>0.0.1</Version>
     <Authors></Authors>
     <Company></Company>
   </PropertyGroup>
