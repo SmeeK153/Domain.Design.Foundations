@@ -23,6 +23,8 @@ jobs:
 
       - name: Build solution and generate NuGet package
         run: |  
+          pwd
+          ls
           cd Domain.Design.Foundations
           dotnet pack -c Release -o out  
 
