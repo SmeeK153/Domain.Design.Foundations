@@ -16,4 +16,4 @@ jobs:
             dotnet-version: '3.1.100'
       - run: dotnet pack -c Release -o out  
       - run: ls
-      - run: dotnet nuget push ./out/*.nupkg -k ${{ secrets.DOMAIN_DESIGN_NUGET_API_KEY }} --skip-duplicate --no-symbols true -s https://api.nuget.org/v3/index.json
+      - run: dotnet nuget push ./out/*.nupkg -k ${{ secrets.DOMAIN_DESIGN_FOUNDATIONS_NUGET_API_KEY }} --skip-duplicate --no-symbols true -s https://api.nuget.org/v3/index.json
