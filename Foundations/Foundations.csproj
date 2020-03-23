@@ -8,18 +8,16 @@
     <OutputType>library</OutputType>
     <PackageId>Domain.Design.Foundations</PackageId>
     <Version>0.0.2</Version>
-    <Authors></Authors>
-    <Company></Company>
+    <Authors />
+    <Company />
   </PropertyGroup>
   <ItemGroup>
     <Content Include="Core\Entity.cs" />
     <Content Include="Core\ValueObject.cs" />
     <Content Include="Core\Enumeration.cs" />
-    <Content Include="Events\Request.cs" />
-    <Content Include="Exceptions\DomainException.cs" />
-    <Content Include="Events\Query.cs" />
-    <Content Include="Events\IEventPublisher.cs" />
-    <Content Include="Events\Notification.cs" />
     <Content Include="Core\IRepository.cs" />
+    <Content Include="Exceptions\DomainException.cs" />
+    <Content Include="Events\Command.cs" />
+    <Content Include="Events\DomainEvent.cs" />
   </ItemGroup>
 </Project>

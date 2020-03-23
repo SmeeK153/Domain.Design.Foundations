@@ -4,12 +4,7 @@ using System.Threading.Tasks;
 
 namespace Foundations.Core
 {
-    public interface IRepository<Entity, TId> where Entity : IAggregateRoot
+    public interface IRepository<TAggregateRoot> where TAggregateRoot : IAggregateRoot
     {
-        Task<Entity<TId>> Get(TId id);
-
-        Task<IEnumerable<Entity<TId>>> GetMany(Func<Entity<TId>, bool> predicate);
-
-        Task Save(Entity<TId> entity);
     }
 }

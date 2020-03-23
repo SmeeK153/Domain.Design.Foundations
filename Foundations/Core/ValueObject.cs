@@ -6,7 +6,7 @@ namespace Foundations.Core
 {
     public abstract class ValueObject : IEquatable<ValueObject>
     {
-        protected abstract IEnumerable<object> GetAtomicValues();
+        protected abstract IEnumerable<object> GetComponentValues();
 
         public ValueObject GetCopy()
         {
@@ -24,8 +24,8 @@ namespace Foundations.Core
             if (!(obj is ValueObject other))
                 return false;
 
-            IEnumerator<object> thisValues = GetAtomicValues().GetEnumerator();
-            IEnumerator<object> otherValues = other.GetAtomicValues().GetEnumerator();
+            IEnumerator<object> thisValues = GetComponentValues().GetEnumerator();
+            IEnumerator<object> otherValues = other.GetComponentValues().GetEnumerator();
 
             while (thisValues.MoveNext() && otherValues.MoveNext())
             {
@@ -51,10 +51,11 @@ namespace Foundations.Core
         }
 
         public override int GetHashCode() =>
-            GetAtomicValues()
+            GetComponentValues()
             .Select(atomicValue => atomicValue != null ? atomicValue.GetHashCode() : 0)
             .Aggregate((aggregate, atomicValueHasCode) => aggregate ^ atomicValueHasCode);
 
+        
         public static bool operator ==(ValueObject left, ValueObject right)
         {
             if (Object.Equals(left, null))
