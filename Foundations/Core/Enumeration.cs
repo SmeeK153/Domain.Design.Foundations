@@ -21,8 +21,8 @@ namespace Foundations.Core
             .Select(field => field.GetValue(null))
             .Cast<TEnumeration>();
 
-        public static TEnumeration FromValue<TEnumeration>(int value) where TEnumeration : Enumeration =>
-            Parse<TEnumeration>(e => e.Id == value);
+        public static TEnumeration FromId<TEnumeration>(int id) where TEnumeration : Enumeration =>
+            Parse<TEnumeration>(e => e.Id == id);
 
         public static TEnumeration FromName<TEnumeration>(string name) where TEnumeration : Enumeration =>
             Parse<TEnumeration>(e => e.Name.ToLowerInvariant() == name.ToLowerInvariant());
