@@ -17,7 +17,6 @@
     <Content Include="Core\Enumeration.cs" />
     <Content Include="Core\IRepository.cs" />
     <Content Include="Exceptions\DomainException.cs" />
-    <Content Include="Events\Command.cs" />
     <Content Include="Events\DomainEvent.cs" />
   </ItemGroup>
 </Project>
