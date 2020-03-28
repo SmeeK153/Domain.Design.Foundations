@@ -6,61 +6,51 @@ namespace Foundations.Core
 {
     public abstract class ValueObject : IEquatable<ValueObject>
     {
-        protected abstract IEnumerable<object> GetAtomicValues();
-
-        public ValueObject GetCopy()
-        {
-            if (!(this.MemberwiseClone() is ValueObject copy))
-                throw new InvalidOperationException($"{this.GetType().Name} could not be copied");
-
-            return copy;
-        }
+        protected abstract IEnumerable<object> GetComponentValues();
 
         public override bool Equals(object? obj)
         {
-            if (obj is null || obj.GetType() != GetType())
-                return false;
-
+            if (ReferenceEquals(this, obj))
+                return true;
+            
             if (!(obj is ValueObject other))
                 return false;
+            
+            if (obj.GetType() != GetType())
+                return false;
 
-            IEnumerator<object> thisValues = GetAtomicValues().GetEnumerator();
-            IEnumerator<object> otherValues = other.GetAtomicValues().GetEnumerator();
+            using IEnumerator<object> thisValues = GetComponentValues().GetEnumerator();
+            using IEnumerator<object> otherValues = other.GetComponentValues().GetEnumerator();
 
             while (thisValues.MoveNext() && otherValues.MoveNext())
             {
+                if (thisValues.Current is null && otherValues.Current is null)
+                    continue;
+                
                 if (thisValues.Current is null ^ otherValues.Current is null)
                     return false;
 
-                if (thisValues.Current != null && thisValues.Current.Equals(otherValues.Current))
+                if (thisValues.Current != null && !thisValues.Current.Equals(otherValues.Current))
                     return false;
             }
 
-            return !thisValues.MoveNext() && !otherValues.MoveNext();
+            var thisValuesEnd = !thisValues.MoveNext();
+            var otherValuesEnd = !otherValues.MoveNext();
+            return thisValuesEnd && otherValuesEnd;
         }
 
-        public bool Equals(ValueObject? obj)
-        {
-            if (obj is null)
-                return false;
-
-            if (Object.ReferenceEquals(this, obj))
-                return true;
-
-            return Equals((object)obj);
-        }
-
+        public bool Equals(ValueObject? obj) => Equals((object?)obj);
+        
         public override int GetHashCode() =>
-            GetAtomicValues()
+            GetComponentValues()
             .Select(atomicValue => atomicValue != null ? atomicValue.GetHashCode() : 0)
             .Aggregate((aggregate, atomicValueHasCode) => aggregate ^ atomicValueHasCode);
-
+        
         public static bool operator ==(ValueObject left, ValueObject right)
         {
-            if (Object.Equals(left, null))
-                return Object.Equals(right, null) ? true : false;
-            else
-                return left.Equals(right);
+            if (Equals(left, null))
+                return Equals(right, null) ? true : false;
+            return left.Equals(right);
         }
 
         public static bool operator !=(ValueObject left, ValueObject right) => !(left == right);

@@ -8,18 +8,29 @@
     <OutputType>library</OutputType>
     <PackageId>Domain.Design.Foundations</PackageId>
     <Version>0.0.2</Version>
-    <Authors></Authors>
-    <Company></Company>
+    <Authors />
+    <Company />
+    <PackageVersion>0.0.3</PackageVersion>
+    <Title>Domain Design Foundations</Title>
+    <Description>Simple domain driven design seeding components implementation in .NET</Description>
+    <PackageLicenseUrl>https://github.com/SmeeK153/Domain.Design.Foundations/blob/master/LICENSE</PackageLicenseUrl>
+    <RepositoryUrl>https://github.com/SmeeK153/Domain.Design.Foundations</RepositoryUrl>
+    <PackageTags>C# DDD DomainDrivenDesign DomainDesign</PackageTags>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>full</DebugType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
     <Content Include="Core\Entity.cs" />
     <Content Include="Core\ValueObject.cs" />
     <Content Include="Core\Enumeration.cs" />
-    <Content Include="Events\Request.cs" />
-    <Content Include="Exceptions\DomainException.cs" />
-    <Content Include="Events\Query.cs" />
-    <Content Include="Events\IEventPublisher.cs" />
-    <Content Include="Events\Notification.cs" />
     <Content Include="Core\IRepository.cs" />
+    <Content Include="Exceptions\DomainException.cs" />
+    <Content Include="Events\DomainEvent.cs" />
   </ItemGroup>
 </Project>

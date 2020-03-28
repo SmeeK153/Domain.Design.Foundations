@@ -1,0 +1,23 @@
+name: gated
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Gated Pull Request Build
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@master
+
+      - name: Install .NET Core v3.1.100
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '3.1.100'
+
+      - name: Run tests
+        run: dotnet test
