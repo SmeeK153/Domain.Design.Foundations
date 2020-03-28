@@ -99,12 +99,12 @@ namespace Domain.Enumerations
                 new ExampleEnumeration(5, "PropertyEnumerationEnumerableExample3")
             };
             
-        public static IEnumerable<ExampleEnumeration> BackedEnumerationEnumerableExample { get; } = 
+        public static IEnumerable<ExampleEnumeration> BackedPropertyEnumerationEnumerableExample { get; } = 
             new List<ExampleEnumeration>
             {
-                new ExampleEnumeration(6, "BackedEnumerationEnumerableExample1"),
-                new ExampleEnumeration(7, "BackedEnumerationEnumerableExample2"),
-                new ExampleEnumeration(8, "BackedEnumerationEnumerableExample3")
+                new ExampleEnumeration(6, "BackedPropertyEnumerationEnumerableExample1"),
+                new ExampleEnumeration(7, "BackedPropertyEnumerationEnumerableExample2"),
+                new ExampleEnumeration(8, "BackedPropertyEnumerationEnumerableExample3")
             };
         
         public ExampleEnumeration(int id, string name) : base(id, name)
