@@ -1,10 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-
 namespace Foundations.Core
 {
-    public interface IRepository<TAggregateRoot> where TAggregateRoot : IAggregateRoot
+    public interface IRepository<TEntity> where TEntity : IAggregateRoot
     {
     }
 }
