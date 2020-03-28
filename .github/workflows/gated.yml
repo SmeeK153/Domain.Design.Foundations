@@ -5,6 +5,10 @@ on:
     types: [opened, synchronize]
     branches:
       - master
+  pull_request_review:
+    types: [submitted, edited]
+    branches:
+      - master
 
 jobs:
   build:
