@@ -13,7 +13,7 @@
     <PackageVersion>0.0.3</PackageVersion>
     <Title>Domain Design Foundations</Title>
     <Description>Simple domain driven design seeding components implementation in .NET</Description>
-    <PackageLicenseUrl>https://github.com/SmeeK153/Domain.Design.Foundations/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/SmeeK153/Domain.Design.Foundations</RepositoryUrl>
     <PackageTags>C# DDD DomainDrivenDesign DomainDesign</PackageTags>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
