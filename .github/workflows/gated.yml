@@ -23,10 +23,11 @@ jobs:
         with:
           dotnet-version: '3.1.100'
 
-      - name: Run tests
+      - name: Run tests and generate coverage report
         run: |
           dotnet test /p:CollectCoverage=true /p:CoverletOutput=TestResults/ /p:CoverletOutputFormat=lcov
-          ls
+          ls -a
+          ls ./Tests
 
       - name: Publish coverage report to coveralls.io
         uses: coverallsapp/github-action@master
