@@ -5,6 +5,10 @@ on:
     types: [opened, synchronize]
     branches:
       - master
+  pull_request_review:
+    types: [submitted, edited]
+    branches:
+      - master
 
 jobs:
   build:
@@ -18,6 +22,15 @@ jobs:
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: '3.1.100'
+          
+      - name: Install MSBuild Coverlet
+        run: dotnet add Tests package coverlet.msbuild
+        
+      - name: Run tests and generate coverage report
+        run: dotnet test /p:CollectCoverage=true /p:CoverletOutput=./coverage/lcov.info /p:CoverletOutputFormat=lcov
 
-      - name: Run tests
-        run: dotnet test
+      - name: Publish coverage report to coveralls.io
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-lcov: ./Tests/coverage/lcov.info
