@@ -27,9 +27,10 @@ jobs:
         run: dotnet add Tests package coverlet.msbuild
         
       - name: Run tests and generate coverage report
-        run: dotnet test /p:CollectCoverage=true /p:CoverletOutput=./Tests/coverage/lcov.info /p:CoverletOutputFormat=lcov
+        run: dotnet test /p:CollectCoverage=true /p:CoverletOutput=./coverage/lcov.info /p:CoverletOutputFormat=lcov
 
       - name: Publish coverage report to coveralls.io
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-lcov: ./Tests/coverage/lcov.info
