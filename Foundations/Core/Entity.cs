@@ -28,7 +28,7 @@ namespace Foundations.Core
         
         protected sealed override IEnumerable<object> GetComponentValues()
         {
-            yield return Id;
+            if (Id != null) yield return Id;
         }
         
         public sealed override bool Equals(object? obj)
