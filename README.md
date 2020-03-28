@@ -91,15 +91,15 @@ namespace Domain.Enumerations
         public static ExampleEnumeration BackedPropertyExample { get; } = 
             new ExampleEnumeration(2, "BackedPropertyExample");
         
-        public static readonly IEnumerable<ExampleEnumeration> ReadOnlyEnumerationEnumerable = 
+        public static readonly IEnumerable<ExampleEnumeration> PropertyEnumerationEnumerableExample = 
             new List<ExampleEnumeration>
             {
-                new ExampleEnumeration(3, "ReadOnlyEnumerationEnumerableExample1"),
-                new ExampleEnumeration(4, "ReadOnlyEnumerationEnumerableExample2"),
-                new ExampleEnumeration(5, "ReadOnlyEnumerationEnumerableExample3")
+                new ExampleEnumeration(3, "PropertyEnumerationEnumerableExample1"),
+                new ExampleEnumeration(4, "PropertyEnumerationEnumerableExample2"),
+                new ExampleEnumeration(5, "PropertyEnumerationEnumerableExample3")
             };
             
-        public static IEnumerable<ExampleEnumeration> BackedEnumerationEnumerable { get; } = 
+        public static IEnumerable<ExampleEnumeration> BackedEnumerationEnumerableExample { get; } = 
             new List<ExampleEnumeration>
             {
                 new ExampleEnumeration(6, "BackedEnumerationEnumerableExample1"),
