@@ -29,7 +29,6 @@
     <Content Include="Core\Entity.cs" />
     <Content Include="Core\ValueObject.cs" />
     <Content Include="Core\Enumeration.cs" />
-    <Content Include="Core\IRepository.cs" />
     <Content Include="Exceptions\DomainException.cs" />
     <Content Include="Events\DomainEvent.cs" />
   </ItemGroup>
