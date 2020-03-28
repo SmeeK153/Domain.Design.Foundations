@@ -1,4 +1,4 @@
-name: build
+name: gated
 
 on:
   pull_request:
