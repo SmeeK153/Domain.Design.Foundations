@@ -10,7 +10,7 @@
     <Version>0.0.2</Version>
     <Authors />
     <Company />
-    <PackageVersion>0.0.3</PackageVersion>
+    <PackageVersion>0.0.4</PackageVersion>
     <Title>Domain Design Foundations</Title>
     <Description>Simple domain driven design seeding components implementation in .NET</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>

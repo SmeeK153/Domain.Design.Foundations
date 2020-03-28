@@ -4,8 +4,14 @@ using System.Linq;
 
 namespace Foundations.Core
 {
+    /// <summary>
+    /// Unique representation of a fixed, stateless abstraction
+    /// </summary>
     public abstract class ValueObject : IEquatable<ValueObject>
     {
+        /// <summary>
+        /// Provides the applicable values of the derived type that should be considered in equality operations
+        /// </summary>
         protected abstract IEnumerable<object> GetComponentValues();
 
         public override bool Equals(object? obj)
