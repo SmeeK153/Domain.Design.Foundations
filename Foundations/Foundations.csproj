@@ -5,12 +5,11 @@
     <LangVersion>8.0</LangVersion>
     <Nullable>enable</Nullable>
     <IsPackable>true</IsPackable>
-    <OutputType>library</OutputType>
+    <OutputType>Library</OutputType>
     <PackageId>Domain.Design.Foundations</PackageId>
-    <Version>0.0.2</Version>
     <Authors />
     <Company />
-    <PackageVersion>0.0.4</PackageVersion>
+    <PackageVersion>0.0.5</PackageVersion>
     <Title>Domain Design Foundations</Title>
     <Description>Simple domain driven design seeding components implementation in .NET</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
