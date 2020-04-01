@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using FluentAssertions;
-using FluentAssertions.Common;
 using Foundations.Core;
+using Foundations.Core.Abstract;
 using Foundations.Events;
 using Xunit;
 
@@ -16,9 +16,14 @@ namespace Tests
 
         private static readonly Action<DomainEvent> DummyAction = new List<DomainEvent>().Add;
         
-        private class TestEntity : Entity<int>
+        private class TestEntity : Entity
         {
-            public TestEntity(int id, Action<DomainEvent> testPublisher = null) :
+            public TestEntity(Action<DomainEvent> testPublisher = null) :
+                base(testPublisher ?? DummyAction)
+            {
+            }
+            
+            public TestEntity(Guid id, Action<DomainEvent> testPublisher = null) :
                 base(id, testPublisher ?? DummyAction)
             {
             }
@@ -49,8 +54,9 @@ namespace Tests
         [Fact]
         public void EqualEntityIsResolvedAsEqual()
         {
-            var entity = new TestEntity(123);
-            var compare = new TestEntity(123);
+            var guid = Guid.NewGuid();
+            var entity = new TestEntity(guid);
+            var compare = new TestEntity(guid);
             entity.Equals(compare).Should().BeTrue();
             (entity == compare).Should().BeTrue();
         }
@@ -58,8 +64,8 @@ namespace Tests
         [Fact]
         public void DifferentEntityIsResolveAsUnequal()
         {
-            var entity = new TestEntity(123);
-            var compare = new TestEntity(789);
+            var entity = new TestEntity();
+            var compare = new TestEntity();
             entity.Equals(compare).Should().BeFalse();
             (entity == compare).Should().BeFalse();
             (entity != compare).Should().BeTrue();
@@ -68,7 +74,7 @@ namespace Tests
         [Fact]
         public void DifferentEntityTypesResolveAsUnequal()
         {
-            var entity = new TestEntity(123);
+            var entity = new TestEntity();
             var complexEntity = new ComplexTextEntity("123", "another");
             entity.Equals(complexEntity).Should().BeFalse();
         }
@@ -96,7 +102,7 @@ namespace Tests
         public void NullEntityDoesNotEqualNonNullEntity()
         {
             TestEntity entity = null;
-            var compare = new TestEntity(789);
+            var compare = new TestEntity();
             (entity == compare).Should().BeFalse();
             (entity != compare).Should().BeTrue();
         }
@@ -106,7 +112,7 @@ namespace Tests
         {
             var testEvents = new List<DomainEvent>();
             void Action(DomainEvent e) => testEvents.Add(e);
-            var entity = new TestEntity(123, Action);
+            var entity = new TestEntity(Action);
             entity.AddTestEvent();
             entity.AddTestEvent();
             entity.AddTestEvent();
@@ -124,7 +130,7 @@ namespace Tests
         {
             var testEvents = new List<DomainEvent>();
             void Action(DomainEvent e) => testEvents.Add(e);
-            var entity = new TestEntity(123, Action);
+            var entity = new TestEntity(Action);
             var testEvent = entity.AddTestEvent();
             entity.AddTestEvent();
             entity.AddTestEvent();
