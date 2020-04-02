@@ -9,7 +9,7 @@
     <PackageId>Domain.Design.Foundations</PackageId>
     <Authors />
     <Company />
-    <PackageVersion>0.0.5</PackageVersion>
+    <PackageVersion>0.0.6</PackageVersion>
     <Title>Domain Design Foundations</Title>
     <Description>Simple domain driven design seeding components implementation in .NET</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -26,9 +26,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="Core\Entity.cs" />
-    <Content Include="Core\ValueObject.cs" />
     <Content Include="Core\Enumeration.cs" />
-    <Content Include="Exceptions\DomainException.cs" />
+    <Content Include="Core\ValueObject.cs" />
     <Content Include="Events\DomainEvent.cs" />
+    <Content Include="Exceptions\DomainException.cs" />
   </ItemGroup>
 </Project>

@@ -6,11 +6,11 @@ namespace Foundations.Core
 {
     public abstract class Entity : Entity<Guid>
     {
-        protected Entity(Action<DomainEvent> domainEventPublisher) : base(Guid.NewGuid(), domainEventPublisher)
+        protected Entity() : base(Guid.NewGuid())
         {
         }
 
-        protected Entity(Guid id, Action<DomainEvent> domainEventPublisher) : base(id, domainEventPublisher)
+        protected Entity(Guid id) : base(id)
         {
         }
     }
