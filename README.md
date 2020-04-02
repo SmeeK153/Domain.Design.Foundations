@@ -27,10 +27,18 @@ __.NET Core CLI__
 Foundations is designed to work without external dependencies to leave domain implementations free to incorporate different technologies and patterns on top of them. Here are some quick examples to get started:
 
 ### ValueObject
-ValueObjects are identified by their component values and may even be equated by those values. Each implementation of a ValueObject needs to provide which component values are to be considered for any equality operations. For edge-case situations in which one or more component values need to apply during equality operations, they may be omitted from this set of values, but in nearly every circumstance this set should represent all of the component values.
+#### Identity
+ValueObjects are identified by their component values, which may not be altered once the instance is created.
+The values used in the identity are defined via `GetComponentValues()` in order to allow all, or less than all,
+component values to be included in the identity.
 
-_The ValueObject provides the basis for the remaining Core Foundations._
+#### Equality
+The same component values that comprise the identity of the ValueObject also serve as the basis for instance equality.
 
+#### Effects
+ValueObjects may not create effects on their domain.
+
+#### Example
 ```csharp
 using Foundations.Core;
 
@@ -57,8 +65,18 @@ namespace Domain.ValueObjects
 ```
 
 ### Entity
-Entities are identified by their individual Id value, which may not change, but their remaining component values may be altered. The default equality between entities is defined via their Id value and their remaining component values are ignored. Entities must be provided a handler for publishing their own domain events so that the appropriate effects may take place after the domain is finished. This technique exist in-place of integrating the Foundations with any other specific pattern or dependency to handle this operation.
+#### Identity
+Entities are identified by their individual Id value, which may not change, but their remaining component values may be altered.
+The underlying identity determination of an entity may not be changed.
 
+#### Equality
+The default equality between entities is defined via their Id value and their remaining component values are ignored.
+
+#### Effects
+In order for the effects (via `DomainEvent`s) created by the entity to be consumed, a DomainEventObserver must be instantiated to listen for them
+within its respective context (i.e., sub-domain, infrastructure, etc.)
+
+#### Example
 ```csharp
 using System;
 using Foundations.Core;
@@ -67,7 +85,7 @@ namespace Domain.Entities
 {
     public class ExampleEntity : Entity<Guid>
     {
-        public ExampleEntity(Guid id, Action<DomainEvent> domainEventPublisher) : base(id, domainEventPublisher)
+        public ExampleEntity(Guid id) : base(id)
         {
             // ...
         }
@@ -76,8 +94,19 @@ namespace Domain.Entities
 ```
 
 ### Enumeration
-Instances of a derived Enumeration type must exist as static values, but they may exist as individual properties on their derived type or exist as an IEnumerable of their derived type; this exists to allow for defining preknown instances of the derived type, as well as, unknown instances that may need to be loaded later or generated. 
+#### Identity
+Entities are identified by their Id and Name values, which may not change.
+The underlying identity determination of an enumeration may not be changed.
+Must exist as a static value, either as an individual property or part of an enumerable of enumerations;
+the enumerable exists to provide the means to dynamically load enumerations, if needed.
 
+#### Equality
+The default equality between enumerations is defined via their Id and Name values.
+
+#### Effects
+Enumerations may not create effects on their domain.
+
+#### Example
 ```csharp
 using Foundations.Core;
 

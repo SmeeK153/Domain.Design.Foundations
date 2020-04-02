@@ -10,44 +10,42 @@ namespace Tests
 {
     public class EntityTests
     {
+        private class TestEventObserver : DomainEventObserver
+        {
+            public List<DomainEvent> Events { get; } = new List<DomainEvent>();
+
+            public override void OnNext(DomainEvent value)
+            {
+                Events.Add(value);
+            }
+        }
+        
         private class TestEvent : DomainEvent
         {
         }
 
-        private static readonly Action<DomainEvent> DummyAction = new List<DomainEvent>().Add;
-        
         private class TestEntity : Entity
         {
-            public TestEntity(Action<DomainEvent> testPublisher = null) :
-                base(testPublisher ?? DummyAction)
+            public TestEntity()
             {
             }
             
-            public TestEntity(Guid id, Action<DomainEvent> testPublisher = null) :
-                base(id, testPublisher ?? DummyAction)
+            public TestEntity(Guid id) : base(id)
             {
             }
 
-            public TestEvent AddTestEvent()
+            public TestEvent PublishTestEvent()
             {
                 var testEvent = new TestEvent();
-                AddDomainEvent(testEvent);
+                PublishDomainEvent(testEvent);
                 return testEvent;
             }
-
-            public void RemoveTestEvent(TestEvent testEvent)
-            {
-                RemoveDomainEvent(testEvent);
-            }
-
-            public void RemoveAllTestEvents() => ClearDomainEvents();
         }
 
         private class ComplexTextEntity : Entity<string>
         {
             public string AnotherAttribute { get; private set; }
-            public ComplexTextEntity(string id, string another, Action<DomainEvent> testPublisher = null) : 
-                base(id, testPublisher ?? DummyAction) =>
+            public ComplexTextEntity(string id, string another) : base(id) =>
                 (AnotherAttribute) = (another);
         }
 
@@ -110,43 +108,51 @@ namespace Tests
         [Fact]
         public void EntityCanPublishEventsToHandlerToTriggerEffects()
         {
-            var testEvents = new List<DomainEvent>();
-            void Action(DomainEvent e) => testEvents.Add(e);
-            var entity = new TestEntity(Action);
-            entity.AddTestEvent();
-            entity.AddTestEvent();
-            entity.AddTestEvent();
-            
-            entity.PublishDomainEvents();
-            testEvents.Count.Should().Be(3);
-            
-            testEvents.Clear();
-            entity.PublishDomainEvents();
-            testEvents.Count.Should().Be(3);
+            var observer = new TestEventObserver();
+            var entity = new TestEntity();
+            entity.PublishTestEvent();
+            entity.PublishTestEvent();
+            entity.PublishTestEvent();
+            observer.Events.Count.Should().Be(3);
         }
 
         [Fact]
-        public void EntityCanAddAndRemoveEvents()
+        public void NoMoreEventsAreReceivedAfterObserverIsDisposed()
         {
-            var testEvents = new List<DomainEvent>();
-            void Action(DomainEvent e) => testEvents.Add(e);
-            var entity = new TestEntity(Action);
-            var testEvent = entity.AddTestEvent();
-            entity.AddTestEvent();
-            entity.AddTestEvent();
-            
-            entity.PublishDomainEvents();
-            testEvents.Count.Should().Be(3);
-            
-            testEvents.Clear();
-            entity.RemoveTestEvent(testEvent);
-            entity.PublishDomainEvents();
-            testEvents.Count.Should().Be(2);
-            
-            testEvents.Clear();
-            entity.RemoveAllTestEvents();
-            entity.PublishDomainEvents();
-            testEvents.Count.Should().Be(0);
+            var observer = new TestEventObserver();
+            var entity = new TestEntity();
+            entity.PublishTestEvent();
+            observer.Events.Count.Should().Be(1);
+            observer.Dispose();
+
+            entity.PublishTestEvent();
+            observer.Events.Count.Should().Be(1);
+        }
+        
+        [Fact]
+        public void NoMoreEventsAreReceivedAfterPublisherIsCompleted()
+        {
+            var observer = new TestEventObserver();
+            var entity = new TestEntity();
+            entity.PublishTestEvent();
+            observer.Events.Count.Should().Be(1);
+            observer.OnCompleted();
+
+            entity.PublishTestEvent();
+            observer.Events.Count.Should().Be(1);
+        }
+        
+        [Fact]
+        public void NoMoreEventsAreReceivedAfterPublisherYieldsAnException()
+        {
+            var observer = new TestEventObserver();
+            var entity = new TestEntity();
+            entity.PublishTestEvent();
+            observer.Events.Count.Should().Be(1);
+            observer.OnError(new Exception());
+
+            entity.PublishTestEvent();
+            observer.Events.Count.Should().Be(1);
         }
     }
 }
