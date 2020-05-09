@@ -1,15 +1,15 @@
 using System;
 using System.Collections.Generic;
-using Foundations.Events;
-using Foundations.Exceptions;
+using Domain.Design.Foundations.Events;
+using Domain.Design.Foundations.Exceptions;
 
-namespace Foundations.Core.Abstract
+namespace Domain.Design.Foundations.Core.Abstract
 {
     /// <summary>
     /// Unique representation of a stateful abstraction
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public abstract class Entity<T> : ValueObject
+    public abstract class Entity<T> : ValueObject, IPublishable
     {
         /// <summary>
         /// Identifier of the Entity instance
@@ -24,7 +24,9 @@ namespace Foundations.Core.Abstract
         /// <summary>
         /// Publishes a domain event to the domain and external infrastructure observer(s)
         /// </summary>
-        protected Action<DomainEvent> PublishDomainEvent { get; } = DomainEventPublisher.Instance.Publish;
+        Action<DomainEvent> IPublishable.PublishDomainEvent { get; set; } = (domainEvent) => { };
+        
+        protected Action<DomainEvent> PublishDomainEvent => IPublishable.PublishDomainEvent;
 
         protected sealed override IEnumerable<object> GetComponentValues()
         {

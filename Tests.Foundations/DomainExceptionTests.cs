@@ -1,9 +1,9 @@
 using System;
+using Domain.Design.Foundations.Exceptions;
 using FluentAssertions;
-using Foundations.Exceptions;
 using Xunit;
 
-namespace Tests
+namespace Tests.Foundations
 {
     public class DomainExceptionTests
     {

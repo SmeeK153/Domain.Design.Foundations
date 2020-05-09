@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
+using Domain.Design.Foundations.Core;
+using Domain.Design.Foundations.Core.Abstract;
+using Domain.Design.Foundations.Events;
 using FluentAssertions;
-using Foundations.Core;
-using Foundations.Core.Abstract;
-using Foundations.Events;
 using Xunit;
 
-namespace Tests
+namespace Tests.Foundations
 {
     public class EntityTests
     {
@@ -150,7 +150,7 @@ namespace Tests
             entity.PublishTestEvent();
             observer.Events.Count.Should().Be(1);
             observer.OnError(new Exception());
-
+            entity
             entity.PublishTestEvent();
             observer.Events.Count.Should().Be(1);
         }

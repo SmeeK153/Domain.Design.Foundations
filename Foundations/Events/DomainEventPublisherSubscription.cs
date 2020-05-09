@@ -1,6 +1,6 @@
 using System;
 
-namespace Foundations.Events
+namespace Domain.Design.Foundations.Events
 {
     internal class DomainEventPublisherSubscription : IDisposable
     {

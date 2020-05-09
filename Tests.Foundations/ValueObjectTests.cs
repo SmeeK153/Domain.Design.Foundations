@@ -1,9 +1,9 @@
 using System.Collections.Generic;
+using Domain.Design.Foundations.Core;
 using FluentAssertions;
-using Foundations.Core;
 using Xunit;
 
-namespace Tests
+namespace Tests.Foundations
 {
     public class ValueObjectTests
     {

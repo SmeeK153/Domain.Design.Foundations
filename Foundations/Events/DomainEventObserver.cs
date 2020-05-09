@@ -1,15 +1,15 @@
 using System;
 
-namespace Foundations.Events
+namespace Domain.Design.Foundations.Events
 {
     /// <summary>
     /// Observer for domain events to further propagate events across the external infrastructure
     /// </summary>
     public abstract class DomainEventObserver : IObserver<DomainEvent>, IDisposable
     {
-        protected DomainEventObserver()
+        protected DomainEventObserver(IObservable<DomainEvent> observable)
         {
-            Subscription = DomainEventPublisher.Instance.Subscribe(this);
+            Subscription = observable.Subscribe(this);
         }
         
         private IDisposable Subscription { get; }

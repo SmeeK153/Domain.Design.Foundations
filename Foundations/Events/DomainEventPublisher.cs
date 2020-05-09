@@ -1,15 +1,14 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 
-namespace Foundations.Events
+namespace Domain.Design.Foundations.Events
 {
-    internal class DomainEventPublisher : IObservable<DomainEvent>
+    public sealed class DomainEventPublisher : IObservable<DomainEvent>
     {
         private DomainEventPublisher()
         {
         }
-        
-        internal static DomainEventPublisher Instance { get; } = new DomainEventPublisher();
 
         private List<IObserver<DomainEvent>> Observers { get; } = new List<IObserver<DomainEvent>>();
         
