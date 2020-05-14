@@ -25,8 +25,8 @@ namespace Domain.Design.Foundations.Core.Abstract
         /// Publishes a domain event to the domain and external infrastructure observer(s)
         /// </summary>
         Action<DomainEvent> IPublishable.PublishDomainEvent { get; set; } = (domainEvent) => { };
-        
-        protected Action<DomainEvent> PublishDomainEvent => IPublishable.PublishDomainEvent;
+
+        protected Action<DomainEvent> PublishDomainEvent => (evt) => { return; }; //IPublishable.PublishDomainEvent;
 
         protected sealed override IEnumerable<object> GetComponentValues()
         {

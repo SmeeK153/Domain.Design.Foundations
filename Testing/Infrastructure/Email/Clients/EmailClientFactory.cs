@@ -28,9 +28,9 @@ namespace Domain.Design.Testing.Infrastructure.Email.Clients
         {
             return emailClientSettings.ServerType switch
             {
-                EmailServerType.API => new ApiMailClient(),
-                EmailServerType.POP3 => new Pop3MailClient(),
-                EmailServerType.IMAP => new ImapMailClient(),
+                // EmailServerType.API => new ApiMailClient(),
+                // EmailServerType.POP3 => new Pop3MailClient(),
+                // EmailServerType.IMAP => new ImapMailClient(),
                 _ => throw new InvalidEnumArgumentException(
                     $"{emailClientSettings.ServerType} is not a supported {nameof(EmailServerType)}")
             };
