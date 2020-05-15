@@ -1,6 +1,5 @@
 using System.ComponentModel;
 using System.Net.Http;
-using Domain.Design.Testing.Infrastructure.Email.Clients.Abstract;
 using Domain.Design.Testing.Infrastructure.Email.Clients.Gmail;
 using Domain.Design.Testing.Infrastructure.Email.Clients.GuerrillaMail;
 using Domain.Design.Testing.Infrastructure.Email.Settings;

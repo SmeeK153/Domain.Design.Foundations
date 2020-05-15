@@ -1,12 +1,10 @@
-using System;
 using System.Collections.Generic;
 using Domain.Design.Foundations.Events;
-using Infrastructure.Events;
-using Infrastructure.Middleware;
+using Domain.Design.Foundations.Middleware;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Infrastructure.Extensions
+namespace Domain.Design.Foundations.Extensions
 {
     public static partial class DomainExtensions
     {
@@ -14,9 +12,6 @@ namespace Infrastructure.Extensions
         {
             // Add a new queue of domain events for each new request
             services.AddScoped<IEnumerable<DomainEvent>, DomainEventQueue>();
-            
-            // Add a new publisher for each new request
-            services.AddScoped<IObservable<DomainEvent>, DomainEventPublisher>();
             
             return services;
         }

@@ -1,9 +1,8 @@
 using System.Collections.Generic;
-using Domain.Design.Foundations.Events;
 
-namespace Infrastructure.Events
+namespace Domain.Design.Foundations.Events
 {
-    internal sealed class DomainEventQueue : Queue<DomainEvent>
+    public sealed class DomainEventQueue : Queue<DomainEvent>
     {
     }
 }

@@ -9,8 +9,10 @@ namespace Domain.Design.Foundations.Core.Abstract
     /// Unique representation of a stateful abstraction
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public abstract class Entity<T> : ValueObject, IPublishable
+    public abstract class Entity<T> : ValueObject, IPublishable, IObservable<DomainEvent>
     {
+        private List<IObserver<DomainEvent>> Observers { get; } = new List<IObserver<DomainEvent>>();
+        
         /// <summary>
         /// Identifier of the Entity instance
         /// </summary>
@@ -20,17 +22,35 @@ namespace Domain.Design.Foundations.Core.Abstract
         {
             Id = id ?? throw new DomainException($"Id is required for entity {GetType().Name}");
         }
-
-        /// <summary>
-        /// Publishes a domain event to the domain and external infrastructure observer(s)
-        /// </summary>
-        Action<DomainEvent> IPublishable.PublishDomainEvent { get; set; } = (domainEvent) => { };
-
-        protected Action<DomainEvent> PublishDomainEvent => (evt) => { return; }; //IPublishable.PublishDomainEvent;
-
+        
         protected sealed override IEnumerable<object> GetComponentValues()
         {
             if (Id != null) yield return Id;
+        }
+        
+        public IDisposable Subscribe(IObserver<DomainEvent> observer)
+        {
+            if (!Observers.Contains(observer))
+            {
+                Observers.Add(observer);
+            }
+            
+            var disposable = new DomainSubscription(() => Unsubscribe(observer));
+
+            return disposable;
+        }
+        
+        private void Unsubscribe(IObserver<DomainEvent> observer)
+        {
+            if (Observers.Contains(observer))
+            {
+                Observers.Remove(observer);
+            }
+        }
+        
+        public void PublishDomainEvent(DomainEvent domainEvent)
+        {
+            Observers.ForEach(observer => observer.OnNext(domainEvent));
         }
     }
 }
