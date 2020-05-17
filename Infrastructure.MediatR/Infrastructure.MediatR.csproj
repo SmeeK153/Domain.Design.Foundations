@@ -9,6 +9,7 @@
         <Title>Domain Design Foundations Extensions Dependency Injection For MediatR</Title>
         <PackageVersion>0.0.8</PackageVersion>
         <Description>Dependency injection via MediatR for Domain.Design.Foundations</Description>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <RepositoryUrl>https://github.com/SmeeK153/Domain.Design.Foundations</RepositoryUrl>
         <PackageTags>C# DDD DomainDrivenDesign DomainDesign</PackageTags>
     </PropertyGroup>
