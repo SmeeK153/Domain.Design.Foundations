@@ -10,6 +10,7 @@
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <Authors>SmeeK153</Authors>
         <Description>Dependency injection for Domain.Design.Foundations</Description>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <RepositoryUrl>https://github.com/SmeeK153/Domain.Design.Foundations</RepositoryUrl>
         <PackageTags>C# DDD DomainDrivenDesign DomainDesign</PackageTags>
     </PropertyGroup>
