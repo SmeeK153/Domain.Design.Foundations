@@ -3,7 +3,7 @@ using Domain.Design.Foundations.Exceptions;
 using FluentAssertions;
 using Xunit;
 
-namespace Tests.Foundations
+namespace Tests.Foundations.Core
 {
     public class DomainExceptionTests
     {

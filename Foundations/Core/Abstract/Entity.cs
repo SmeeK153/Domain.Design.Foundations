@@ -9,7 +9,7 @@ namespace Domain.Design.Foundations.Core.Abstract
     /// Unique representation of a stateful abstraction
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public abstract class Entity<T> : ValueObject, IPublishable, IObservable<DomainEvent>
+    public abstract class Entity<T> : ValueObject, IObservable<DomainEvent>
     {
         private List<IObserver<DomainEvent>> Observers { get; } = new List<IObserver<DomainEvent>>();
         
@@ -48,9 +48,10 @@ namespace Domain.Design.Foundations.Core.Abstract
             }
         }
         
-        public void PublishDomainEvent(DomainEvent domainEvent)
-        {
+        protected void PublishDomainEvent(DomainEvent domainEvent) =>
             Observers.ForEach(observer => observer.OnNext(domainEvent));
-        }
+
+        protected void PublishDomainException(DomainException domainException) =>
+            Observers.ForEach(observer => observer.OnError(domainException));
     }
 }

@@ -6,27 +6,33 @@ namespace Domain.Design.Foundations.Events
     /// <summary>
     /// Observer for domain events to further propagate events across the external infrastructure
     /// </summary>
-    public sealed class DomainEventObserver : IObserver<DomainEvent>, IDisposable
+    internal class DomainEventObserver : IObserver<DomainEvent>, IDisposable
     {
-        public DomainEventObserver(IObservable<DomainEvent> observable, Queue<DomainEvent> domainEventQueue)
+        public DomainEventObserver(IObservable<DomainEvent> observable)
         {
-            Subscription = observable.Subscribe(this);
-            _domainEventQueue = domainEventQueue;
+            Subscription = (DomainSubscription) observable.Subscribe(this);
         }
-        private Queue<DomainEvent> _domainEventQueue { get; }
-        private IDisposable Subscription { get; }
 
-        public void OnCompleted()
+        public Queue<DomainEvent> DomainEvents => 
+            Subscription.IsDisposed ? new Queue<DomainEvent>(_domainEventQueue) : new Queue<DomainEvent>();
+        
+        private Queue<DomainEvent> _domainEventQueue { get; } = new Queue<DomainEvent>();
+        
+        private DomainSubscription Subscription { get; }
+
+        public virtual void OnCompleted()
         {
             Dispose();
         }
 
-        public void OnError(Exception error)
+        public virtual void OnError(Exception error)
         {
+            _domainEventQueue.Clear();
             Dispose();
+            throw error;
         }
 
-        public void OnNext(DomainEvent value)
+        public virtual void OnNext(DomainEvent value)
         {
             _domainEventQueue.Enqueue(value);
         }

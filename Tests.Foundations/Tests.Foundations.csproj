@@ -20,18 +20,18 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="3.1.4" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.2.0" />
     <PackageReference Include="Moq" Version="4.14.1" />
     <PackageReference Include="xunit" Version="2.4.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
     <PackageReference Include="coverlet.collector" Version="1.0.1" />
     <PackageReference Include="FluentAssertions" Version="5.10.2" />
-    <Content Include="EntityTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Foundations\Foundations.csproj" />
-    <Content Include="ValueObjectTests.cs" />
-    <Content Include="EnumerationTests.cs" />
+    <ProjectReference Include="..\Infrastructure.MediatR\Infrastructure.MediatR.csproj" />
     <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
   </ItemGroup>
 </Project>

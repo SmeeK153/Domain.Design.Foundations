@@ -2,7 +2,7 @@ using System;
 
 namespace Domain.Design.Foundations.Events
 {
-    internal class DomainSubscription : IDisposable
+    public class DomainSubscription : IDisposable
     {
         internal DomainSubscription(Action disposal)
         {
@@ -12,6 +12,12 @@ namespace Domain.Design.Foundations.Events
         private Action Disposal { get; }
 
 
-        public void Dispose() => Disposal.Invoke();
+        public void Dispose()
+        {
+            Disposal.Invoke();
+            IsDisposed = true;
+        }
+
+        public bool IsDisposed { get; private set; } = false;
     }
 }

@@ -14,4 +14,8 @@
       <ProjectReference Include="..\Foundations\Foundations.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Events\Managers" />
+    </ItemGroup>
+
 </Project>

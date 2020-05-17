@@ -3,7 +3,7 @@ using Domain.Design.Foundations.Core;
 using FluentAssertions;
 using Xunit;
 
-namespace Tests.Foundations
+namespace Tests.Foundations.Core
 {
     public class ValueObjectTests
     {
