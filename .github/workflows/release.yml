@@ -33,5 +33,12 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           path-to-lcov: ./coverage/lcov.info
       
-      - name: Publish nuget packages
-        run: dotnet nuget push ./out/*.nupkg -k ${{ secrets.NUGET_GALLERY_API_KEY }} --skip-duplicate --no-symbols true -s https://api.nuget.org/v3/index.json
+      - name: Publish Domain.Design.Foundations
+        run: dotnet nuget push ./out/Domain.Design.Foundations.*.nupkg -k ${{ secrets.NUGET_GALLERY_API_KEY }} --skip-duplicate --no-symbols true -s https://api.nuget.org/v3/index.json
+        
+      - name: Publish Domain.Design.Foundations.Extensions.DependencyInjection
+        run: dotnet nuget push ./out/Domain.Design.Foundations.Extensions.DependencyInjection.*.nupkg -k ${{ secrets.NUGET_GALLERY_API_KEY }} --skip-duplicate --no-symbols true -s https://api.nuget.org/v3/index.json
+          
+      - name: Publish Domain.Design.Foundations.Extensions.DependencyInjection.MediatR
+        run: dotnet nuget push ./out/Domain.Design.Foundations.Extensions.DependencyInjection.MediatR.*.nupkg -k ${{ secrets.NUGET_GALLERY_API_KEY }} --skip-duplicate --no-symbols true -s https://api.nuget.org/v3/index.json  
+        
