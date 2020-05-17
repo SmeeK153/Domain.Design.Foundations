@@ -40,10 +40,8 @@ namespace Tests.Foundations.Core
                 return testEvent;
             }
 
-            public void PublishTestException()
-            {
+            public void PublishTestException() =>
                 PublishDomainException(new TestException());
-            }
         }
 
         private class ComplexTextEntity : Entity<string>
