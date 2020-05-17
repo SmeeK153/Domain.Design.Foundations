@@ -16,6 +16,7 @@
     <RepositoryUrl>https://github.com/SmeeK153/Domain.Design.Foundations</RepositoryUrl>
     <PackageTags>C# DDD DomainDrivenDesign DomainDesign</PackageTags>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <RootNamespace>Domain.Design.Foundations</RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <PlatformTarget>AnyCPU</PlatformTarget>

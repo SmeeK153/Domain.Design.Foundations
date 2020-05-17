@@ -1,8 +1,7 @@
 using System;
-using Foundations.Core.Abstract;
-using Foundations.Events;
+using Domain.Design.Foundations.Core.Abstract;
 
-namespace Foundations.Core
+namespace Domain.Design.Foundations.Core
 {
     public abstract class Entity : Entity<Guid>
     {

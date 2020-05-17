@@ -1,29 +1,28 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Domain.Design.Foundations.Core;
+using Domain.Design.Foundations.Core.Abstract;
+using Domain.Design.Foundations.Events;
+using Domain.Design.Foundations.Exceptions;
 using FluentAssertions;
-using Foundations.Core;
-using Foundations.Core.Abstract;
-using Foundations.Events;
 using Xunit;
 
-namespace Tests
+namespace Tests.Foundations.Core
 {
     public class EntityTests
     {
-        private class TestEventObserver : DomainEventObserver
-        {
-            public List<DomainEvent> Events { get; } = new List<DomainEvent>();
-
-            public override void OnNext(DomainEvent value)
-            {
-                Events.Add(value);
-            }
-        }
-        
         private class TestEvent : DomainEvent
         {
         }
 
+        private class TestException : DomainException
+        {
+            public TestException() : base("Test exception")
+            {
+            }
+        }
+        
         private class TestEntity : Entity
         {
             public TestEntity()
@@ -40,13 +39,26 @@ namespace Tests
                 PublishDomainEvent(testEvent);
                 return testEvent;
             }
+
+            public void PublishTestException() =>
+                PublishDomainException(new TestException());
         }
 
         private class ComplexTextEntity : Entity<string>
         {
-            public string AnotherAttribute { get; private set; }
+            public string AnotherAttribute { get; }
             public ComplexTextEntity(string id, string another) : base(id) =>
                 (AnotherAttribute) = (another);
+        }
+        
+        private class TestDomainEventManager : DomainEventObserverManager
+        {
+            public List<DomainEvent> DomainEvents { get; } = new List<DomainEvent>();
+            protected override Task ExecuteEvent(DomainEvent domainEvent)
+            {
+                DomainEvents.Add(domainEvent);
+                return Task.CompletedTask;
+            }
         }
 
         [Fact]
@@ -106,53 +118,47 @@ namespace Tests
         }
 
         [Fact]
-        public void EntityCanPublishEventsToHandlerToTriggerEffects()
+        public async Task EntityCanPublishEventsToHandlerToTriggerEffects()
         {
-            var observer = new TestEventObserver();
             var entity = new TestEntity();
+            var manager = new TestDomainEventManager();
+            await manager.StartListening(entity);
             entity.PublishTestEvent();
             entity.PublishTestEvent();
             entity.PublishTestEvent();
-            observer.Events.Count.Should().Be(3);
+            await manager.ExecuteEvents();
+            manager.DomainEvents.Count.Should().Be(3);
         }
 
         [Fact]
-        public void NoMoreEventsAreReceivedAfterObserverIsDisposed()
+        public async Task NoMoreEventsAreReceivedAfterEventsAreExecuted()
         {
-            var observer = new TestEventObserver();
             var entity = new TestEntity();
+            var manager = new TestDomainEventManager();
+            await manager.StartListening(entity);
             entity.PublishTestEvent();
-            observer.Events.Count.Should().Be(1);
-            observer.Dispose();
+            await manager.ExecuteEvents();
+            manager.DomainEvents.Count.Should().Be(1);
 
             entity.PublishTestEvent();
-            observer.Events.Count.Should().Be(1);
+            manager.DomainEvents.Count.Should().Be(1);
         }
-        
+
         [Fact]
-        public void NoMoreEventsAreReceivedAfterPublisherIsCompleted()
+        public async Task NoEventsAreReceivedAfterPublisherYieldsAnException()
         {
-            var observer = new TestEventObserver();
             var entity = new TestEntity();
+            var manager = new TestDomainEventManager();
+            await manager.StartListening(entity);
             entity.PublishTestEvent();
-            observer.Events.Count.Should().Be(1);
-            observer.OnCompleted();
+            Action action = () => entity.PublishTestException();
+            action.Should().Throw<TestException>();
+
+            await manager.ExecuteEvents();
+            manager.DomainEvents.Count.Should().Be(0);
 
             entity.PublishTestEvent();
-            observer.Events.Count.Should().Be(1);
-        }
-        
-        [Fact]
-        public void NoMoreEventsAreReceivedAfterPublisherYieldsAnException()
-        {
-            var observer = new TestEventObserver();
-            var entity = new TestEntity();
-            entity.PublishTestEvent();
-            observer.Events.Count.Should().Be(1);
-            observer.OnError(new Exception());
-
-            entity.PublishTestEvent();
-            observer.Events.Count.Should().Be(1);
+            manager.DomainEvents.Count.Should().Be(0);
         }
     }
 }

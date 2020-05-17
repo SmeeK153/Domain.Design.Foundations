@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <RootNamespace>Domain.Design.Testing.Infrastructure.Email</RootNamespace>
+        <Nullable>enable</Nullable>
+        <IsPackable>false</IsPackable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="MailKit" Version="2.6.0" />
+      <PackageReference Include="Microsoft.Extensions.Http" Version="3.1.3" />
+      <PackageReference Include="MimeKit" Version="2.6.0" />
+      <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    </ItemGroup>
+
+</Project>

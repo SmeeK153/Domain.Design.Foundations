@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <IsPackable>true</IsPackable>
+        <PackageId>Domain.Design.Foundations.Extensions.DependencyInjection.MediatR</PackageId>
+        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+        <RootNamespace>Domain.Design.Foundations</RootNamespace>
+        <Title>Domain Design Foundations Extensions Dependency Injection For MediatR</Title>
+        <PackageVersion>0.0.8</PackageVersion>
+        <Description>Dependency injection via MediatR for Domain.Design.Foundations</Description>
+        <RepositoryUrl>https://github.com/SmeeK153/Domain.Design.Foundations</RepositoryUrl>
+        <PackageTags>C# DDD DomainDrivenDesign DomainDesign</PackageTags>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="MediatR" Version="8.0.1" />
+      <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="8.0.0" />
+    </ItemGroup>
+
+</Project>

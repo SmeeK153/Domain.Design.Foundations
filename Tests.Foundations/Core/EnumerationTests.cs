@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Domain.Design.Foundations.Core;
 using FluentAssertions;
-using Foundations.Core;
 using Xunit;
 
-namespace Tests
+namespace Tests.Foundations.Core
 {
     public class TestEnumeration : Enumeration
     {

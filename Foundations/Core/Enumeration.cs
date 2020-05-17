@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace Foundations.Core
+namespace Domain.Design.Foundations.Core
 {
     /// <summary>
     /// Unique representation of a specific type of state

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Foundations.Core
+namespace Domain.Design.Foundations.Core
 {
     /// <summary>
     /// Unique representation of a fixed, stateless abstraction
