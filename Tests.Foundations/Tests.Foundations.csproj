@@ -30,8 +30,8 @@
     <PackageReference Include="FluentAssertions" Version="5.10.2" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Foundations\Foundations.csproj" />
-    <ProjectReference Include="..\Infrastructure.MediatR\Infrastructure.MediatR.csproj" />
-    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
+    <ProjectReference Include="..\Domain.Design.Foundations.Extensions.DependencyInjection.MediatR\Domain.Design.Foundations.Extensions.DependencyInjection.MediatR.csproj" />
+    <ProjectReference Include="..\Domain.Design.Foundations.Extensions.DependencyInjection\Domain.Design.Foundations.Extensions.DependencyInjection.csproj" />
+    <ProjectReference Include="..\Domain.Design.Foundations\Domain.Design.Foundations.csproj" />
   </ItemGroup>
 </Project>

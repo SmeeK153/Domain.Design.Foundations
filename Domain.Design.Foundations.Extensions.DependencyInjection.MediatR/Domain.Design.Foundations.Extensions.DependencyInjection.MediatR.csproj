@@ -7,7 +7,7 @@
         <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
         <RootNamespace>Domain.Design.Foundations</RootNamespace>
         <Title>Domain Design Foundations Extensions Dependency Injection For MediatR</Title>
-        <PackageVersion>0.0.8</PackageVersion>
+        <PackageVersion>0.0.9</PackageVersion>
         <Description>Dependency injection via MediatR for Domain.Design.Foundations</Description>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <RepositoryUrl>https://github.com/SmeeK153/Domain.Design.Foundations</RepositoryUrl>
@@ -15,12 +15,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
+      <PackageReference Include="MediatR" Version="8.0.1" />
+      <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="8.0.0" />
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="MediatR" Version="8.0.1" />
-      <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="8.0.0" />
+      <ProjectReference Include="..\Domain.Design.Foundations.Extensions.DependencyInjection\Domain.Design.Foundations.Extensions.DependencyInjection.csproj" />
     </ItemGroup>
 
 </Project>
