@@ -2,21 +2,20 @@
 
 Foundations is designed to work without external dependencies to leave domain 
 implementations free to incorporate different technologies and patterns on top 
-of them. Here are some quick examples to get started:
+of them. Here are the three (3) basic building blocks and a quick example for each:
 
 ### ValueObject
 #### Identity
-ValueObjects are identified by their component values, which may not be altered 
-once the instance is created. The values used in the identity are defined via 
-`GetComponentValues()` in order to allow all, or less than all, component values 
-to be included in the identity.
+`ValueObject`s are immutable objects that represent conceptual identities that 
+which are formed by their component values (as opposed to being identified by a 
+unique identifier).
 
 #### Equality
-The same component values that comprise the identity of the ValueObject also 
-serve as the basis for instance equality.
+Equivalence between `ValueObject`s is determined by the values specified in and 
+only the values specified in `GetComponentValues()`.
 
 #### Effects
-ValueObjects may not create effects on their domain.
+`ValueObject`s may not create any effects.
 
 #### Example
 ```csharp
@@ -59,19 +58,20 @@ namespace Domain.ValueObjects
 
 ### Entity
 #### Identity
-Entities are identified by their individual Id value, which may not change, but their 
-remaining component values may be altered. The underlying identity determination of an 
-entity may not be changed.
+`Entity`'s are mutable objects that represent a reference to an underlying concept 
+that may have changing properties, the component values of the concept may change
+without affecting the underlying identity of the concept.
 
 #### Equality
-The default equality between entities is defined via their Id value and their remaining 
-component values are ignored.
+Equivalence between `Entity`'s is determined by their `Id` value and only by their 
+`Id` value; all remaining component values are ignored.
 
 #### Effects
-In order for the effects (via `DomainEvent`s) published by the entity to be consumed, 
-an observer must subscribe to the specific entity's events within its respective context 
-(i.e., sub-domain, infrastructure, etc.) via `Subscribe(IObserver<DomainEvent> observer)`;
-the result yields a disposable subscription to facilitate the unsubscription process.
+`Entity`'s have the ability to create effects for state changes to be propagated to any
+subsequent layers and/or sub-systems. In order to facilitate this process, any `Entity`
+has the ability to emit events via `PublishDomainEvent(DomainEvent domainEvent)`. In order
+for subsequent systems to consume these events, they must subscribe to the respective
+`Entity` before any effects are created via `Subscribe(IObserver<DomainEvent> observer)`.
 
 #### Example
 ```csharp
@@ -95,17 +95,17 @@ namespace Domain.Entities
 
 ### Enumeration
 #### Identity
-Entities are identified by their Id and Name values, which may not change.
-The underlying identity determination of an enumeration may not be changed.
-Must exist as a static value, either as an individual property or part of 
-an enumerable of `Enumeration`s; the enumerable exists to provide the means 
-to dynamically load `Enumeration`s, if needed.
+`Enumeration`s are immutable objects that represent constant identities that 
+which are formed by their `Id` and `Name` to provide a consistent definition of the same
+type of related concepts. Constant definitions may be hard-coded, or loaded statically
+to provide a dynamic listing of constant values at runtime.
 
 #### Equality
-The default equality between enumerations is defined via their Id and Name values.
+Equivalence between `Enumeration`s is determined by their `Id` and `Name` values; 
+all remaining component values are ignored.
 
 #### Effects
-Enumerations may not create effects on their domain.
+`Enumeration`s may not create any effects.
 
 #### Example
 ```csharp
