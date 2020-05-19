@@ -9,7 +9,7 @@
     <PackageId>Domain.Design.Foundations</PackageId>
     <Authors />
     <Company />
-    <PackageVersion>0.0.8</PackageVersion>
+    <PackageVersion>0.0.9</PackageVersion>
     <Title>Domain Design Foundations</Title>
     <Description>Simple domain driven design seeding components implementation in .NET</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
