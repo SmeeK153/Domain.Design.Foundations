@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.Foundations", "Tests.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{EDEDEC0A-1638-4AFA-8EFD-3AEF9E1CBEFC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Email", "Testing\Infrastructure\Email\Email.csproj", "{86B3118E-F697-48F7-85B6-CA443BDCB301}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.Design.Foundations.Testing.Email", "Testing\Infrastructure\Domain.Design.Foundations.Testing.Email\Domain.Design.Foundations.Testing.Email.csproj", "{86B3118E-F697-48F7-85B6-CA443BDCB301}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{B0BB3672-E951-430B-B387-292EE73D2489}"
 EndProject
