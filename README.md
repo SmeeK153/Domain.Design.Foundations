@@ -41,16 +41,6 @@ __.NET Core CLI__
 
 The following packages are available:
 
-* Domain.Design.Foundations - description
-* Domain.Design.Testing.Infrastructure.Email - description
-* Domain.Design.Testing.Behavioral.Moq - description
-
-
-
-## Domain.Design.Testing.Infrastructure.Email
-
-Provides different clients for incorporating testing email integrations within the infrastructure of a system
-
-## Domain.Design.Testing.Behavioral.Moq
-
-
+* [Domain.Design.Foundations](https://github.com/SmeeK153/Domain.Design.Foundations/tree/master/Foundations)
+* [Domain.Design.Foundations.Extensions.DependencyInjection](https://github.com/SmeeK153/Domain.Design.Foundations/tree/master/Infrastructure)
+* [Domain.Design.Foundations.Extensions.DependencyInjection.MediatR](https://github.com/SmeeK153/Domain.Design.Foundations/tree/master/Infrastructure.MediatR)
