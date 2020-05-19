@@ -16,11 +16,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Foundations\Foundations.csproj" />
+      <Folder Include="Events\Managers" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Events\Managers" />
+      <ProjectReference Include="..\Domain.Design.Foundations\Domain.Design.Foundations.csproj" />
     </ItemGroup>
 
 </Project>

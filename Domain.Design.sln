@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Foundations", "Foundations\Foundations.csproj", "{EA6CE2D3-DEF2-4903-95C8-707164420BDD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.Design.Foundations", "Domain.Design.Foundations\Domain.Design.Foundations.csproj", "{EA6CE2D3-DEF2-4903-95C8-707164420BDD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.Foundations", "Tests.Foundations\Tests.Foundations.csproj", "{1F8075BA-8C48-4164-A4D5-C7425004D6B8}"
 EndProject
@@ -17,9 +17,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{F32DF146
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{14DE3BD6-BC60-4642-B134-C39B8017BB60}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{1D0D37A6-CCE3-4B78-9A2B-B5D6941F72BC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.Design.Foundations.Extensions.DependencyInjection", "Domain.Design.Foundations.Extensions.DependencyInjection\Domain.Design.Foundations.Extensions.DependencyInjection.csproj", "{1D0D37A6-CCE3-4B78-9A2B-B5D6941F72BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.MediatR", "Infrastructure.MediatR\Infrastructure.MediatR.csproj", "{F4E48567-7484-4805-B9FC-5436F5C7C521}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.Design.Foundations.Extensions.DependencyInjection.MediatR", "Domain.Design.Foundations.Extensions.DependencyInjection.MediatR\Domain.Design.Foundations.Extensions.DependencyInjection.MediatR.csproj", "{F4E48567-7484-4805-B9FC-5436F5C7C521}"
 EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution

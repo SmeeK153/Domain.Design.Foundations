@@ -11,7 +11,7 @@ namespace Domain.Design.Foundations
         {
             _mediator = mediator;
         }
-        
+
         protected override async Task ExecuteEvent(DomainEvent domainEvent)
         {
             await _mediator.Publish(domainEvent);

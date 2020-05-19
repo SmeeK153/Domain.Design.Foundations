@@ -15,12 +15,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
+      <PackageReference Include="MediatR" Version="8.0.1" />
+      <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="8.0.0" />
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="MediatR" Version="8.0.1" />
-      <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="8.0.0" />
+      <ProjectReference Include="..\Domain.Design.Foundations.Extensions.DependencyInjection\Domain.Design.Foundations.Extensions.DependencyInjection.csproj" />
     </ItemGroup>
 
 </Project>
