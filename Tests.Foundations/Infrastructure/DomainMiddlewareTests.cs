@@ -3,11 +3,11 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Domain.Design.Foundations.Events;
 using Domain.Design.Foundations.Extensions;
+using Domain.Design.Foundations.Middleware;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using Moq;
 using Tests.Foundations.Infrastructure.TestApplication;
 using Tests.Foundations.Infrastructure.TestApplication.Events;
@@ -62,16 +62,16 @@ namespace Tests.Foundations.Infrastructure
             {
                 services.AddScoped<IDomainEventRepository>(provider => mockRepository.Object);
             });
-            Action startup = () => new TestServer(webhostBuilder);
+            var server = new TestServer(webhostBuilder);
+            var client = server.CreateClient();
+            Func<Task> startup = async () => await client.GetAsync("/test/fail");
             startup
                 .Should()
                 .ThrowExactly<InvalidOperationException>()
                 .And
                 .Message
                 .Should()
-                .Be("IDomainEventManager must have a provided implementation " +
-                   "via IServiceCollection.AddDomainEvents<T>() if using " +
-                   "IApplicationBuilder.UseDomainEvents()");
+                .Be($"Unable to resolve service for type '{typeof(IDomainEventManager)}' while attempting to Invoke middleware '{typeof(DomainMiddleware)}'.");
         }
     }
 }

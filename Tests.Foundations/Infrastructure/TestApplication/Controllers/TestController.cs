@@ -1,4 +1,3 @@
-using System.Linq;
 using Domain.Design.Foundations.Events;
 using Microsoft.AspNetCore.Mvc;
 using Tests.Foundations.Infrastructure.TestApplication.Events;
