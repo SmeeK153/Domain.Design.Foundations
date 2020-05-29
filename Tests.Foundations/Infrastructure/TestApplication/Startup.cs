@@ -1,4 +1,3 @@
-using System.Reflection;
 using Domain.Design.Foundations.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -6,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
-using Tests.Foundations.Infrastructure.TestApplication.Events;
 
 namespace Tests.Foundations.Infrastructure.TestApplication
 {
