@@ -12,20 +12,20 @@ namespace Domain.Design.Foundations.Extensions
         {
             // Add the domain event manager implementation
             services.AddScoped(typeof(IDomainEventManager), typeof(TEventManager));
-            
             return services;
         }
 
         public static IApplicationBuilder UseDomainEvents(this IApplicationBuilder builder)
         {
-            if (builder.ApplicationServices.GetService<IDomainEventManager>() is null)
+            try
             {
-                throw new InvalidOperationException(
-                    $"{nameof(IDomainEventManager)} must have a provided implementation via " +
-                    $"IServiceCollection.AddDomainEvents<T>() if using IApplicationBuilder.UseDomainEvents()");
+                var service = builder.ApplicationServices.GetRequiredService<IDomainEventManager>();
+                builder.UseMiddleware<DomainMiddleware>();
             }
-            
-            builder.UseMiddleware<DomainMiddleware>();
+            catch (Exception e)
+            {
+                throw new InvalidOperationException("IDomainEventManager must have a provided implementation via IServiceCollection.AddDomainEvents<T>() if using IApplicationBuilder.UseDomainEvents()");
+            }
             return builder;
         }
     }
