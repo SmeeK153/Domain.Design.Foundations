@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace Domain.Design.Foundations.Core
+namespace Domain.Design.Foundations.Core.Abstract
 {
     /// <summary>
     /// Unique representation of a specific type of state
     /// </summary>
-    public class Enumeration : ValueObject
+    /// <typeparam name="T"></typeparam>
+    public abstract class Enumeration<T> : ValueObject
     {
         /// <summary>
         /// Name of the Enumeration instance
@@ -18,9 +19,9 @@ namespace Domain.Design.Foundations.Core
         /// <summary>
         /// Identifier of the Enumeration instance
         /// </summary>
-        public int Id { get; }
+        public T Id { get; }
 
-        protected Enumeration(int id, string name) =>
+        protected Enumeration(T id, string name) =>
             (Id, Name) = (id, name);
         
         /// <summary>
@@ -32,7 +33,7 @@ namespace Domain.Design.Foundations.Core
         /// Retrieves all of the derived type's static instances
         /// </summary>
         /// <typeparam name="TEnumeration"></typeparam>
-        public static IEnumerable<TEnumeration> GetAll<TEnumeration>() where TEnumeration : Enumeration
+        public static IEnumerable<TEnumeration> GetAll<TEnumeration>() where TEnumeration : Enumeration<T>
         {
             var fields = typeof(TEnumeration).GetRuntimeFields().ToList();
 
@@ -52,8 +53,8 @@ namespace Domain.Design.Foundations.Core
         /// <param name="id"></param>
         /// <typeparam name="TEnumeration"></typeparam>
         /// <exception cref="InvalidOperationException">Derived type does not have a static instance with the specified identifier</exception>
-        public static TEnumeration FromId<TEnumeration>(int id) where TEnumeration : Enumeration =>
-            Parse<TEnumeration>(e => e.Id == id);
+        public static TEnumeration FromId<TEnumeration>(T id) where TEnumeration : Enumeration<T> =>
+            Parse<TEnumeration>(e => Equals(e.Id, id));
         
         /// <summary>
         /// Retrieves the specific derived type's static instance based on its name
@@ -61,7 +62,7 @@ namespace Domain.Design.Foundations.Core
         /// <param name="name"></param>
         /// <typeparam name="TEnumeration"></typeparam>
         /// <exception cref="InvalidOperationException">Derived type does not have a static instance with the specified name</exception>
-        public static TEnumeration FromName<TEnumeration>(string name) where TEnumeration : Enumeration =>
+        public static TEnumeration FromName<TEnumeration>(string name) where TEnumeration : Enumeration<T> =>
             Parse<TEnumeration>(e => e.Name.ToLowerInvariant().Equals(name.ToLowerInvariant()));
         
         private static IEnumerable<T> SelectFieldType<T>(List<FieldInfo> fields)
@@ -73,7 +74,7 @@ namespace Domain.Design.Foundations.Core
             return applicableFields;
         }
         
-        private static TEnumeration Parse<TEnumeration>(Func<TEnumeration, bool> predicate) where TEnumeration : Enumeration
+        private static TEnumeration Parse<TEnumeration>(Func<TEnumeration, bool> predicate) where TEnumeration : Enumeration<T>
         {
             var match = GetAll<TEnumeration>().SingleOrDefault(predicate);
             if (match is null)
