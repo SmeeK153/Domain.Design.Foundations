@@ -2,12 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Domain.Design.Foundations.Core;
+using Domain.Design.Foundations.Core.Abstract;
 using FluentAssertions;
 using Xunit;
 
 namespace Tests.Foundations.Core
 {
-    public class TestEnumeration : Enumeration
+    public class TestEnumeration : Enumeration<int>
     {
         public static readonly TestEnumeration Enumeration1 = new TestEnumeration(1, "TestEnumeration1");
         public static readonly TestEnumeration Enumeration2 = new TestEnumeration(2, "TestEnumeration2");
@@ -41,7 +42,7 @@ namespace Tests.Foundations.Core
         [Fact]
         public void EnumerationCanLookupAllOfItsTypes()
         {
-            var enumerations = Enumeration.GetAll<TestEnumeration>().ToList();
+            var enumerations = Enumeration<int>.GetAll<TestEnumeration>().ToList();
             enumerations.Should().NotBeNullOrEmpty();
             enumerations.Should().Contain(TestEnumeration.Enumeration1);
             enumerations.Should().Contain(TestEnumeration.Enumeration2);
@@ -55,26 +56,26 @@ namespace Tests.Foundations.Core
         [Fact]
         public void LookupExistingEnumerationById()
         {
-            Enumeration.FromId<TestEnumeration>(1).Should().Be(TestEnumeration.Enumeration1);
+            Enumeration<int>.FromId<TestEnumeration>(1).Should().Be(TestEnumeration.Enumeration1);
         }
 
         [Fact]
         public void LookupNonexistentEnumerationByIdFails()
         {
-            Action lookupInvalidEnumerationId = () => Enumeration.FromId<TestEnumeration>(-1);
+            Action lookupInvalidEnumerationId = () => Enumeration<int>.FromId<TestEnumeration>(-1);
             lookupInvalidEnumerationId.Should().Throw<InvalidOperationException>();
         }
 
         [Fact]
         public void LookupExistingEnumerationByName()
         {
-            Enumeration.FromName<TestEnumeration>("TestEnumeration1").Should().Be(TestEnumeration.Enumeration1);
+            Enumeration<int>.FromName<TestEnumeration>("TestEnumeration1").Should().Be(TestEnumeration.Enumeration1);
         }
 
         [Fact]
         public void LookupNonexistentEnumerationByNameFails()
         {
-            Action lookupInvalidEnumerationName = () => Enumeration.FromName<TestEnumeration>("InvalidEnumerationName");
+            Action lookupInvalidEnumerationName = () => Enumeration<int>.FromName<TestEnumeration>("InvalidEnumerationName");
             lookupInvalidEnumerationName.Should().Throw<InvalidOperationException>();
         }
 
