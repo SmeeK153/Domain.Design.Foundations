@@ -7,7 +7,7 @@ namespace Domain.Design.Foundations.Core
     /// <summary>
     /// Unique representation of a fixed, stateless abstraction
     /// </summary>
-    public abstract class ValueObject : IEquatable<ValueObject>
+    public abstract class Value : IEquatable<Value>
     {
         /// <summary>
         /// Provides the applicable values of the derived type that should be considered in equality operations
@@ -19,7 +19,7 @@ namespace Domain.Design.Foundations.Core
             if (ReferenceEquals(this, obj))
                 return true;
             
-            if (!(obj is ValueObject other))
+            if (!(obj is Value other))
                 return false;
             
             if (obj.GetType() != GetType())
@@ -45,20 +45,20 @@ namespace Domain.Design.Foundations.Core
             return thisValuesEnd && otherValuesEnd;
         }
 
-        public bool Equals(ValueObject? obj) => Equals((object?)obj);
+        public bool Equals(Value? obj) => Equals((object?)obj);
         
         public override int GetHashCode() =>
             GetComponentValues()
             .Select(atomicValue => atomicValue != null ? atomicValue.GetHashCode() : 0)
             .Aggregate((aggregate, atomicValueHasCode) => aggregate ^ atomicValueHasCode);
         
-        public static bool operator ==(ValueObject left, ValueObject right)
+        public static bool operator ==(Value left, Value right)
         {
             if (Equals(left, null))
                 return Equals(right, null) ? true : false;
             return left.Equals(right);
         }
 
-        public static bool operator !=(ValueObject left, ValueObject right) => !(left == right);
+        public static bool operator !=(Value left, Value right) => !(left == right);
     }
 }

@@ -9,7 +9,7 @@ namespace Domain.Design.Foundations.Core.Abstract
     /// Unique representation of a stateful abstraction
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public abstract class Entity<T> : ValueObject, IObservable<DomainEvent>
+    public abstract class Entity<T> : Value, IObservable<DomainEvent>
     {
         private List<IObserver<DomainEvent>> Observers { get; } = new List<IObserver<DomainEvent>>();
         

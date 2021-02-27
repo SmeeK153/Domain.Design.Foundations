@@ -7,9 +7,9 @@ namespace Tests.Foundations.Core
 {
     public class ValueObjectTests
     {
-        class TestValueObject : ValueObject
+        class TestValue : Value
         {
-            public TestValueObject(string testValue1, bool? testBool1)
+            public TestValue(string testValue1, bool? testBool1)
             {
                 TestValue1 = testValue1;
                 TestBool1 = testBool1;
@@ -23,9 +23,9 @@ namespace Tests.Foundations.Core
             }
         }
 
-        class DifferentTestValueObject : ValueObject
+        class DifferentTestValue : Value
         {
-            public DifferentTestValueObject(string differentValue1, bool differentBool1)
+            public DifferentTestValue(string differentValue1, bool differentBool1)
             {
                 DifferentValue1 = differentValue1;
                 DifferentBool1 = differentBool1;
@@ -42,13 +42,13 @@ namespace Tests.Foundations.Core
         [Fact]
         public void ValueObjectsWithSameValuesAreResolvedAsEqual()
         {
-            var valueObject1 = new TestValueObject("test", true);
-            var valueObject2 = new TestValueObject("test", true);
+            var valueObject1 = new TestValue("test", true);
+            var valueObject2 = new TestValue("test", true);
             valueObject1.Equals(valueObject2).Should().BeTrue();
             (valueObject1 == valueObject2).Should().BeTrue();
 
-            var differentValueObject1 = new DifferentTestValueObject("differentTest", false);
-            var differentValueObject2 = new DifferentTestValueObject("differentTest", false);
+            var differentValueObject1 = new DifferentTestValue("differentTest", false);
+            var differentValueObject2 = new DifferentTestValue("differentTest", false);
             differentValueObject1.Equals(differentValueObject2).Should().BeTrue();
             (differentValueObject1 == differentValueObject2).Should().BeTrue();
         }
@@ -56,9 +56,9 @@ namespace Tests.Foundations.Core
         [Fact]
         public void ValueObjectsWithDifferentValuesAreResolvedAsDifferent()
         {
-            var valueObject1 = new TestValueObject("test", true);
-            var valueObject2 = new TestValueObject("something", false);
-            var valueObject3 = new TestValueObject("something", null);
+            var valueObject1 = new TestValue("test", true);
+            var valueObject2 = new TestValue("something", false);
+            var valueObject3 = new TestValue("something", null);
             valueObject1.Equals(valueObject2).Should().BeFalse();
             valueObject1.Equals(valueObject3).Should().BeFalse();
         }
@@ -66,16 +66,16 @@ namespace Tests.Foundations.Core
         [Fact]
         public void ValueObjectWithNullPropertyIsResolvedAsDifferentWhenOtherIsNonNull()
         {
-            var valueObject1 = new TestValueObject(null, true);
-            var valueObject2 = new TestValueObject(null, null);
+            var valueObject1 = new TestValue(null, true);
+            var valueObject2 = new TestValue(null, null);
             valueObject1.Equals(valueObject2).Should().BeFalse();
         }
         
         [Fact]
         public void DifferentTypesValueObjectsAreResolvedAsDifferent()
         {
-            var valueObject1 = new TestValueObject("test", true);
-            var valueObject2 = new DifferentTestValueObject("test", true);
+            var valueObject1 = new TestValue("test", true);
+            var valueObject2 = new DifferentTestValue("test", true);
             valueObject1.Equals(valueObject2).Should().BeFalse();
             valueObject1.TestBool1.Equals(valueObject2.DifferentBool1).Should().BeTrue();
             valueObject1.TestValue1.Equals(valueObject2.DifferentValue1).Should().BeTrue();
@@ -84,7 +84,7 @@ namespace Tests.Foundations.Core
         [Fact]
         public void ComparingValueObjectToDifferentTypeResolvesAsDifferent()
         {
-            var valueObject1 = new TestValueObject("test", true);
+            var valueObject1 = new TestValue("test", true);
             var valueObject2 = new {testValue1 = "test", testBool1 = true};
             valueObject1.Equals(valueObject2).Should().BeFalse();
         }
@@ -92,8 +92,8 @@ namespace Tests.Foundations.Core
         [Fact]
         public void ComparingValueObjectToNullResolvesAsDifferent()
         {
-            var valueObject1 = new TestValueObject("test", true);
-            var valueObject2 = (TestValueObject) null;
+            var valueObject1 = new TestValue("test", true);
+            var valueObject2 = (TestValue) null;
             valueObject1.Equals(valueObject2).Should().BeFalse();
             (valueObject1 == valueObject2).Should().BeFalse();
             (valueObject1 != valueObject2).Should().BeTrue();

@@ -9,7 +9,7 @@ namespace Domain.Design.Foundations.Core.Abstract
     /// Unique representation of a specific type of state
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public abstract class Enumeration<T> : ValueObject
+    public abstract class Enumeration<T> : Value
     {
         /// <summary>
         /// Name of the Enumeration instance
