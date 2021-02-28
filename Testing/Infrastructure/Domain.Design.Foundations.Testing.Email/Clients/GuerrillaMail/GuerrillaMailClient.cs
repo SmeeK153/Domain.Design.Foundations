@@ -4,11 +4,11 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Domain.Design.Testing.Infrastructure.Email.Clients.Gmail;
-using Domain.Design.Testing.Infrastructure.Email.Settings;
+using Domain.Design.Foundations.Testing.Email.Clients.Gmail;
+using Domain.Design.Foundations.Testing.Email.Settings;
 using Newtonsoft.Json;
 
-namespace Domain.Design.Testing.Infrastructure.Email.Clients.GuerrillaMail
+namespace Domain.Design.Foundations.Testing.Email.Clients.GuerrillaMail
 {
     public class GuerrillaMailClient : EmailClient
     {

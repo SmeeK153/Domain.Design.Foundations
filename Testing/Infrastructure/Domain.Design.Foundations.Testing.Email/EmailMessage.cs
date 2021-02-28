@@ -1,4 +1,4 @@
-namespace Domain.Design.Testing.Infrastructure.Email
+namespace Domain.Design.Foundations.Testing.Email
 {
     public class EmailMessage
     {

@@ -1,4 +1,4 @@
-namespace Domain.Design.Testing.Infrastructure.Email.Clients
+namespace Domain.Design.Foundations.Testing.Email.Clients
 {
     public enum EmailClientProvider
     {

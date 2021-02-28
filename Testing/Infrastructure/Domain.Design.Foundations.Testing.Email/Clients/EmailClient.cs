@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading.Tasks;
-using Domain.Design.Testing.Infrastructure.Email.Settings;
+using Domain.Design.Foundations.Testing.Email.Settings;
 
-namespace Domain.Design.Testing.Infrastructure.Email.Clients
+namespace Domain.Design.Foundations.Testing.Email.Clients
 {
     public abstract class EmailClient
     {

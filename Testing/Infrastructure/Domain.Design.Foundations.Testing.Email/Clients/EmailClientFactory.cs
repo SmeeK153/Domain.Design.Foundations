@@ -1,10 +1,10 @@
 using System.ComponentModel;
 using System.Net.Http;
-using Domain.Design.Testing.Infrastructure.Email.Clients.Gmail;
-using Domain.Design.Testing.Infrastructure.Email.Clients.GuerrillaMail;
-using Domain.Design.Testing.Infrastructure.Email.Settings;
+using Domain.Design.Foundations.Testing.Email.Clients.Gmail;
+using Domain.Design.Foundations.Testing.Email.Clients.GuerrillaMail;
+using Domain.Design.Foundations.Testing.Email.Settings;
 
-namespace Domain.Design.Testing.Infrastructure.Email.Clients
+namespace Domain.Design.Foundations.Testing.Email.Clients
 {
     public class EmailClientFactory
     {

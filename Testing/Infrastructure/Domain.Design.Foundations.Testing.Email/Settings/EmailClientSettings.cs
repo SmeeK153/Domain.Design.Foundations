@@ -1,4 +1,4 @@
-namespace Domain.Design.Testing.Infrastructure.Email.Settings
+namespace Domain.Design.Foundations.Testing.Email.Settings
 {
     public class EmailClientSettings
     {

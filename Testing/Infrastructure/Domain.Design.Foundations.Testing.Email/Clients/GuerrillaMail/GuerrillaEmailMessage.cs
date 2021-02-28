@@ -2,7 +2,7 @@ using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace Domain.Design.Testing.Infrastructure.Email.Clients.GuerrillaMail
+namespace Domain.Design.Foundations.Testing.Email.Clients.GuerrillaMail
 {
     public class GuerrillaEmailMessage
     {

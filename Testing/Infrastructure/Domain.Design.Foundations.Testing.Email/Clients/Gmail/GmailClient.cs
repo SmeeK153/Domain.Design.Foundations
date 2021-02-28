@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Domain.Design.Testing.Infrastructure.Email.Settings;
+using Domain.Design.Foundations.Testing.Email.Settings;
 using MailKit;
 using MailKit.Net.Imap;
 using MimeKit;
 
-namespace Domain.Design.Testing.Infrastructure.Email.Clients.Gmail
+namespace Domain.Design.Foundations.Testing.Email.Clients.Gmail
 {
     public class GmailClient : EmailClient
     {
