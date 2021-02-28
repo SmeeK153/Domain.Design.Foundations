@@ -1,6 +1,6 @@
 using System;
 
-namespace Domain.Design.Foundations.Exceptions
+namespace Domain.Design.Foundations.Events
 {
     /// <summary>
     /// Exception type for domain exceptions

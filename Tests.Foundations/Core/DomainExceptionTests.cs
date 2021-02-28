@@ -1,5 +1,5 @@
 using System;
-using Domain.Design.Foundations.Exceptions;
+using Domain.Design.Foundations.Events;
 using FluentAssertions;
 using Xunit;
 

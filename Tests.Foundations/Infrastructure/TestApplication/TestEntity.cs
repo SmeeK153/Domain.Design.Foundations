@@ -1,5 +1,5 @@
 using Domain.Design.Foundations.Core;
-using Domain.Design.Foundations.Exceptions;
+using Domain.Design.Foundations.Events;
 using Tests.Foundations.Infrastructure.TestApplication.Events;
 
 namespace Tests.Foundations.Infrastructure.TestApplication

@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using Domain.Design.Foundations.Core;
 using Domain.Design.Foundations.Core.Abstract;
 using Domain.Design.Foundations.Events;
-using Domain.Design.Foundations.Exceptions;
 using FluentAssertions;
 using Xunit;
 
