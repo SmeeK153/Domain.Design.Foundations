@@ -16,10 +16,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Events\Managers" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\Domain.Design.Foundations\Domain.Design.Foundations.csproj" />
     </ItemGroup>
 
