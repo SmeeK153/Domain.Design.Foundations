@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Domain.Design.Foundations.Events;
 
 namespace Domain.Design.Foundations.Core.Abstract
 {
@@ -27,8 +28,11 @@ namespace Domain.Design.Foundations.Core.Abstract
         /// </summary>
         /// <param name="id">Unique identity of the <see cref="Enumeration{T}"/> instance</param>
         /// <param name="name">Friendly name describing the <see cref="Enumeration{T}"/> instance</param>
-        protected Enumeration(T id, string name) =>
-            (Id, Name) = (id, name);
+        protected Enumeration(T id, string name)
+        {
+            Id = id ?? throw new DomainException($"Id is required for entity {GetType().Name}");
+            Name = name ?? throw new DomainException($"Name is required for entity {GetType().Name}");
+        }
         
         /// <summary>
         /// Returns a description that represents the <see cref="Enumeration{T}"/> instance.
@@ -130,7 +134,7 @@ namespace Domain.Design.Foundations.Core.Abstract
         /// <see cref="Id"/> and <see cref="Name"/> values</returns>
         protected sealed override IEnumerable<object> GetComponentValues()
         {
-            yield return Id;
+            if (Id != null) yield return Id;
             yield return Name;
         }
     }
