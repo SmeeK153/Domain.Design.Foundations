@@ -1,7 +1,11 @@
+using System;
+using Domain.Design.Foundations.Core.Abstract;
+
 namespace Domain.Design.Foundations.Events
 {
     /// <summary>
-    /// Domain operation that may require processing by the infrastructure to generate any necessary effects
+    /// Unit of work completed by an <see cref="Entity{T}"/> that is to be communicated to any attached
+    /// <see cref="IObserver{T}"/>s.
     /// </summary>
     public abstract class DomainEvent
     {

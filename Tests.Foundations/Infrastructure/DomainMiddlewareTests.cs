@@ -24,7 +24,7 @@ namespace Tests.Foundations.Infrastructure
             var mockRepository = new Mock<IDomainEventRepository>();
             webhostBuilder.ConfigureServices(services =>
             {
-                services.AddDomainEvents(Assembly.GetExecutingAssembly());
+                services.AddMediatRDomainEvents(Assembly.GetExecutingAssembly());
                 services.AddScoped<IDomainEventRepository>(provider => mockRepository.Object);
             });
             var server = new TestServer(webhostBuilder);
@@ -42,7 +42,7 @@ namespace Tests.Foundations.Infrastructure
             var mockRepository = new Mock<IDomainEventRepository>();
             webhostBuilder.ConfigureServices(services =>
             {
-                services.AddDomainEvents(Assembly.GetExecutingAssembly());
+                services.AddMediatRDomainEvents(Assembly.GetExecutingAssembly());
                 services.AddScoped<IDomainEventRepository>(provider => mockRepository.Object);
             });
             var server = new TestServer(webhostBuilder);

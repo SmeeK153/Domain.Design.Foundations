@@ -11,17 +11,6 @@ namespace Tests.Foundations.Core
 {
     public class EntityTests
     {
-        private class TestEvent : DomainEvent
-        {
-        }
-
-        private class TestException : DomainException
-        {
-            public TestException() : base("Test exception")
-            {
-            }
-        }
-        
         private class TestEntity : Entity
         {
             public TestEntity()
@@ -31,16 +20,6 @@ namespace Tests.Foundations.Core
             public TestEntity(Guid id) : base(id)
             {
             }
-
-            public TestEvent PublishTestEvent()
-            {
-                var testEvent = new TestEvent();
-                PublishDomainEvent(testEvent);
-                return testEvent;
-            }
-
-            public void PublishTestException() =>
-                PublishDomainException(new TestException());
         }
 
         private class ComplexTextEntity : Entity<string>
@@ -48,16 +27,6 @@ namespace Tests.Foundations.Core
             public string AnotherAttribute { get; }
             public ComplexTextEntity(string id, string another) : base(id) =>
                 (AnotherAttribute) = (another);
-        }
-        
-        private class TestDomainEventManager : DomainEventObserverManager
-        {
-            public List<DomainEvent> DomainEvents { get; } = new List<DomainEvent>();
-            protected override Task ExecuteEvent(DomainEvent domainEvent)
-            {
-                DomainEvents.Add(domainEvent);
-                return Task.CompletedTask;
-            }
         }
 
         [Fact]
@@ -114,50 +83,6 @@ namespace Tests.Foundations.Core
             var compare = new TestEntity();
             (entity == compare).Should().BeFalse();
             (entity != compare).Should().BeTrue();
-        }
-
-        [Fact]
-        public async Task EntityCanPublishEventsToHandlerToTriggerEffects()
-        {
-            var entity = new TestEntity();
-            var manager = new TestDomainEventManager();
-            await manager.StartListening(entity);
-            entity.PublishTestEvent();
-            entity.PublishTestEvent();
-            entity.PublishTestEvent();
-            await manager.ExecuteEvents();
-            manager.DomainEvents.Count.Should().Be(3);
-        }
-
-        [Fact]
-        public async Task NoMoreEventsAreReceivedAfterEventsAreExecuted()
-        {
-            var entity = new TestEntity();
-            var manager = new TestDomainEventManager();
-            await manager.StartListening(entity);
-            entity.PublishTestEvent();
-            await manager.ExecuteEvents();
-            manager.DomainEvents.Count.Should().Be(1);
-
-            entity.PublishTestEvent();
-            manager.DomainEvents.Count.Should().Be(1);
-        }
-
-        [Fact]
-        public async Task NoEventsAreReceivedAfterPublisherYieldsAnException()
-        {
-            var entity = new TestEntity();
-            var manager = new TestDomainEventManager();
-            await manager.StartListening(entity);
-            entity.PublishTestEvent();
-            Action action = () => entity.PublishTestException();
-            action.Should().Throw<TestException>();
-
-            await manager.ExecuteEvents();
-            manager.DomainEvents.Count.Should().Be(0);
-
-            entity.PublishTestEvent();
-            manager.DomainEvents.Count.Should().Be(0);
         }
     }
 }

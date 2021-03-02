@@ -4,9 +4,18 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Domain.Design.Foundations.Extensions
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public static partial class MediatRDomainExtensions
     {
-        public static IServiceCollection AddDomainEvents(this IServiceCollection services, params Assembly[] assemblies)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="assemblies"></param>
+        /// <returns></returns>
+        public static IServiceCollection AddMediatRDomainEvents(this IServiceCollection services, params Assembly[] assemblies)
         {
             // Add the domain event manager implementation
             services.AddDomainEvents<MediatRDomainEventManager>();
