@@ -1,19 +1,16 @@
 using Domain.Design.Foundations.Events;
 using Microsoft.AspNetCore.Mvc;
-using Tests.Foundations.Infrastructure.TestApplication.Events;
 
-namespace Tests.Foundations.Infrastructure.TestApplication.Controllers
+namespace Tests.Foundations.Events.TestApplication.Controllers
 {
-    [Route("test")]
+    [Route("mock/test")]
     [ApiController]
-    public class TestController : ControllerBase
+    public class MockTestsController : ControllerBase
     {
         private IDomainEventManager _manager { get; }
-        private IDomainEventRepository _repository { get; }
-        public TestController(IDomainEventManager manager, IDomainEventRepository repository)
+        public MockTestsController(IDomainEventManager manager)
         {
             _manager = manager;
-            _repository = repository;
         }
         
         [HttpGet("success")]
@@ -27,7 +24,7 @@ namespace Tests.Foundations.Infrastructure.TestApplication.Controllers
             
             return Ok();
         }
-
+        
         [HttpGet("fail")]
         public ActionResult NonSuccessfulResult()
         {

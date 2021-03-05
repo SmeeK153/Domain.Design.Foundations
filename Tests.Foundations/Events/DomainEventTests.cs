@@ -6,7 +6,7 @@ using Domain.Design.Foundations.Events;
 using FluentAssertions;
 using Xunit;
 
-namespace Tests.Foundations.Core
+namespace Tests.Foundations.Events
 {
     public class DomainEventTests
     {

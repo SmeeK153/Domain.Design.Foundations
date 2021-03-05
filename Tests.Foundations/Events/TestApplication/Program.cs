@@ -2,7 +2,7 @@ using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
-namespace Tests.Foundations.Infrastructure.TestApplication
+namespace Tests.Foundations.Events.TestApplication
 {
     public class Program
     {

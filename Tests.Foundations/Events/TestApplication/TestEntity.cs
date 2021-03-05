@@ -1,8 +1,8 @@
 using Domain.Design.Foundations.Core;
 using Domain.Design.Foundations.Events;
-using Tests.Foundations.Infrastructure.TestApplication.Events;
+using Tests.Foundations.Events.TestApplication.Events;
 
-namespace Tests.Foundations.Infrastructure.TestApplication
+namespace Tests.Foundations.Events.TestApplication
 {
     public class TestEntity : Entity
     {

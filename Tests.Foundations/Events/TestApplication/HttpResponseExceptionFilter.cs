@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace Tests.Foundations.Infrastructure.TestApplication
+namespace Tests.Foundations.Events.TestApplication
 {
     public class HttpResponseExceptionFilter : IActionFilter, IOrderedFilter
     {

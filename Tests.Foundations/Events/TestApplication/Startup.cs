@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 
-namespace Tests.Foundations.Infrastructure.TestApplication
+namespace Tests.Foundations.Events.TestApplication
 {
     public class Startup
     {

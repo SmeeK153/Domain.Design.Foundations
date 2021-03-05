@@ -1,6 +1,6 @@
 using System;
 
-namespace Tests.Foundations.Infrastructure.TestApplication
+namespace Tests.Foundations.Events.TestApplication
 {
     public class HttpResponseException : Exception
     {

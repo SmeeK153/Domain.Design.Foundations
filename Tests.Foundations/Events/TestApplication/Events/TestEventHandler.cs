@@ -2,7 +2,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 
-namespace Tests.Foundations.Infrastructure.TestApplication.Events
+namespace Tests.Foundations.Events.TestApplication.Events
 {
     public class TestEventHandler : INotificationHandler<TestDomainEvent>
     {

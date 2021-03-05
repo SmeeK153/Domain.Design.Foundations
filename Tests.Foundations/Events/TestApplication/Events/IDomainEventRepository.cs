@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Domain.Design.Foundations.Events;
 
-namespace Tests.Foundations.Infrastructure.TestApplication.Events
+namespace Tests.Foundations.Events.TestApplication.Events
 {
     public interface IDomainEventRepository
     {
