@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <LangVersion>8.0</LangVersion>
     <Nullable>enable</Nullable>
     <IsPackable>true</IsPackable>
@@ -9,7 +9,7 @@
     <PackageId>Domain.Design.Foundations</PackageId>
     <Authors />
     <Company />
-    <PackageVersion>0.0.11</PackageVersion>
+    <PackageVersion>0.0.12</PackageVersion>
     <Title>Domain Design Foundations</Title>
     <Description>Simple domain driven design seeding components implementation in .NET</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
