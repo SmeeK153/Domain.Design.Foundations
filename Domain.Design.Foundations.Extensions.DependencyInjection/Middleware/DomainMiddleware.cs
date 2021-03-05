@@ -16,10 +16,12 @@ namespace Domain.Design.Foundations.Middleware
         public DomainMiddleware(RequestDelegate next) => (_next) = (next);
         
         /// <summary>
-        /// 
+        /// Integrates with the core middleware framework to execute domain event processing during the request
+        /// lifecycle.
         /// </summary>
-        /// <param name="context"></param>
-        /// <param name="manager"></param>
+        /// <param name="context"><see cref="HttpRequest"/> metadata content</param>
+        /// <param name="manager"><see cref="IDomainEventManager"/> configured to manage domain event processing
+        /// throughout the request lifecycle</param>
         /// <returns></returns>
         public async Task InvokeAsync(HttpContext context, IDomainEventManager manager)
         {

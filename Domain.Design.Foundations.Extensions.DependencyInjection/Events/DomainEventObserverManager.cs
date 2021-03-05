@@ -7,28 +7,27 @@ using Domain.Design.Foundations.Core.Abstract;
 namespace Domain.Design.Foundations.Events
 {
     /// <summary>
-    /// 
+    /// Manages the <see cref="DomainEvent"/> processing strategies throughout the request lifecycle.
     /// </summary>
     public abstract class DomainEventObserverManager : IDomainEventManager
     {
         /// <summary>
-        /// 
+        /// Registers a new <see cref="DomainEvent"/> listener with the desired processing behavior.
         /// </summary>
-        /// <param name="observableDomainEntity"></param>
-        /// <param name="behavior"></param>
+        /// <param name="observableDomainEntity"><see cref="Entity{T}"/> to be observed</param>
+        /// <param name="behavior">Processing strategy for received <see cref="DomainEvent"/>s</param>
         /// <returns></returns>
-        public Task StartListening(IObservable<DomainEvent> observableDomainEntity, ObserverBehavior behavior)
+        public Task StartListening(IObservable<DomainEvent> observableDomainEntity, EObserverBehavior behavior)
         {
             switch (behavior)
             {
-                case ObserverBehavior.Immediate:
+                case EObserverBehavior.Immediate:
                     Observers.Add(new DomainEventImmediateObserver(observableDomainEntity, ExecuteEvent));
                     break;
-                case ObserverBehavior.Deferred:
+                case EObserverBehavior.Deferred:
                     Observers.Add(new DomainEventDeferredObserver(observableDomainEntity, ExecuteEvent));
                     break;
             }
-
             return Task.CompletedTask;
         }
 

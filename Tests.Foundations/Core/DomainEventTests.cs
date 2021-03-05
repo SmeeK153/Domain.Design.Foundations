@@ -44,7 +44,7 @@ namespace Tests.Foundations.Core
         {
             var entity = new TestEntity();
             var manager = new TestDomainEventManager();
-            await manager.StartListening(entity, ObserverBehavior.Deferred);
+            await manager.StartListening(entity, EObserverBehavior.Deferred);
             entity.PublishTestEvent();
             entity.PublishTestEvent();
             entity.PublishTestEvent();
@@ -57,7 +57,7 @@ namespace Tests.Foundations.Core
         {
             var entity = new TestEntity();
             var manager = new TestDomainEventManager();
-            await manager.StartListening(entity, ObserverBehavior.Immediate);
+            await manager.StartListening(entity, EObserverBehavior.Immediate);
             entity.PublishTestEvent();
             entity.PublishTestEvent();
             entity.PublishTestEvent();
@@ -70,7 +70,7 @@ namespace Tests.Foundations.Core
         {
             var entity = new TestEntity();
             var manager = new TestDomainEventManager();
-            await manager.StartListening(entity, ObserverBehavior.Deferred);
+            await manager.StartListening(entity, EObserverBehavior.Deferred);
             entity.PublishTestEvent();
             manager.Dispose();
             manager.DomainEvents.Count.Should().Be(1);
@@ -86,7 +86,7 @@ namespace Tests.Foundations.Core
         {
             var entity = new TestEntity();
             var manager = new TestDomainEventManager();
-            await manager.StartListening(entity, ObserverBehavior.Deferred);
+            await manager.StartListening(entity, EObserverBehavior.Deferred);
             entity.PublishTestEvent();
             Action action = () => entity.PublishTestException();
             action.Should().Throw<TestException>();
@@ -105,7 +105,7 @@ namespace Tests.Foundations.Core
         {
             var entity = new TestEntity();
             var manager = new TestDomainEventManager();
-            await manager.StartListening(entity, ObserverBehavior.Immediate);
+            await manager.StartListening(entity, EObserverBehavior.Immediate);
             entity.PublishTestEvent();
             Action action = () => entity.PublishTestException();
             action.Should().Throw<TestException>();

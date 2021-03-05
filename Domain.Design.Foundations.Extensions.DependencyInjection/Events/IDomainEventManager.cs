@@ -16,6 +16,6 @@ namespace Domain.Design.Foundations.Events
         /// <param name="observableDomainEntity"></param>
         /// <param name="behavior"></param>
         /// <returns></returns>
-        Task StartListening(IObservable<DomainEvent> observableDomainEntity, ObserverBehavior behavior);
+        Task StartListening(IObservable<DomainEvent> observableDomainEntity, EObserverBehavior behavior);
     }
 }

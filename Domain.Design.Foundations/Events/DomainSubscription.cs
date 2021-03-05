@@ -1,9 +1,11 @@
 using System;
+using Domain.Design.Foundations.Core.Abstract;
 
 namespace Domain.Design.Foundations.Events
 {
     /// <summary>
-    /// 
+    /// <see cref="IObserver{T}"/>'s subscription to listen to any <see cref="DomainEvent"/>s published by the
+    /// associated <see cref="Entity{T}"/>.
     /// </summary>
     public class DomainSubscription : IDisposable
     {

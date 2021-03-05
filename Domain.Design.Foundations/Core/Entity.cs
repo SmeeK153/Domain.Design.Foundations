@@ -5,7 +5,7 @@ using Domain.Design.Foundations.Events;
 namespace Domain.Design.Foundations.Core
 {
     /// <summary>
-    /// Unique representation of a stateful abstraction using a <see cref="Guid"/> as the identity
+    /// Unique representation of a stateful abstraction using a <see cref="Guid"/> as the identity.
     /// </summary>
     public abstract class Entity : Entity<Guid>
     {

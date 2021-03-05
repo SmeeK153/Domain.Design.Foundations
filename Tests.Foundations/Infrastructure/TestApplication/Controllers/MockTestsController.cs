@@ -17,7 +17,7 @@ namespace Tests.Foundations.Infrastructure.TestApplication.Controllers
         public ActionResult SuccessfulResult()
         {
             var entity = new TestEntity();
-            _manager.StartListening(entity, ObserverBehavior.Deferred);
+            _manager.StartListening(entity, EObserverBehavior.Deferred);
             entity.PublishTestEvent();
             entity.PublishTestEvent();
             entity.PublishTestEvent();
@@ -29,7 +29,7 @@ namespace Tests.Foundations.Infrastructure.TestApplication.Controllers
         public ActionResult NonSuccessfulResult()
         {
             var entity = new TestEntity();
-            _manager.StartListening(entity, ObserverBehavior.Deferred);
+            _manager.StartListening(entity, EObserverBehavior.Deferred);
             entity.PublishTestEvent();
             entity.PublishTestEvent();
             entity.PublishTestEvent();
