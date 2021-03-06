@@ -13,10 +13,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@master
       
-      - name: Install .NET Core v3.1.100
+      - name: Install .NET Core v5.0.200
         uses: actions/setup-dotnet@v1    
         with:
-            dotnet-version: '3.1.100'
+            dotnet-version: '5.0.200'
             
       - name: Install MSBuild Coverlet
         run: dotnet add Tests.Foundations package coverlet.msbuild
