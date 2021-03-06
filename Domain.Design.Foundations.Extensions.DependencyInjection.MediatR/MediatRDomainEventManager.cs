@@ -17,9 +17,7 @@ namespace Domain.Design.Foundations
         /// <see cref="IObserver{T}"/>s to the <see cref="INotificationHandler{TNotification}"/>.
         /// </summary>
         /// <param name="mediator">MediatR instance to use for publishing <see cref="DomainEvent"/>s</param>
-        /// <param name="handler"><see cref="INotificationHandler{TNotification}"/> to received published
-        /// <see cref="DomainEvent"/>s</param>
-        public MediatRDomainEventManager(IMediator mediator, INotificationHandler<MediatRDomainEvent> handler)
+        public MediatRDomainEventManager(IMediator mediator)
         {
             Mediator = mediator;
         }
@@ -32,7 +30,7 @@ namespace Domain.Design.Foundations
         /// <see cref="IObserver{T}"/> has been listening to</param>
         protected override async Task ExecuteEvent(DomainEvent domainEvent)
         {
-            await Mediator.Publish(domainEvent);
+            await Mediator.Publish(domainEvent as MediatRDomainEvent);
         }
         
         /// <summary>

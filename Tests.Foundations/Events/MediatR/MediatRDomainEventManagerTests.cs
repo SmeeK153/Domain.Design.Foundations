@@ -22,46 +22,45 @@ namespace Tests.Foundations.Events.MediatR
         {
             var webhostBuilder = Program.CreateHostBuilder();
             var mockRepository = new Mock<IDomainEventRepository>();
+            mockRepository.Setup(x => x.LogDomainEvent(It.IsAny<DomainEvent>()));
             webhostBuilder.ConfigureServices(services =>
             {
-                services.AddMediatRDomainEvents(Assembly.GetExecutingAssembly());
-                services.AddScoped<IDomainEventRepository>(provider => mockRepository.Object);
+                services.AddMediatRDomainEvents(Assembly.GetAssembly(typeof(TestEventHandler)));
+                services.AddScoped(provider => mockRepository.Object);
             });
             var server = new TestServer(webhostBuilder);
             var client = server.CreateClient();
             var response = await client.GetAsync("/test/success");
             response.IsSuccessStatusCode.Should().BeTrue();
-            
+
             mockRepository.Verify(x => x.LogDomainEvent(It.IsAny<DomainEvent>()), Times.Exactly(3));
         }
-        
+
         [Fact]
         public async Task NoQueuedDomainEventsAreExecutedByApplicationBuilderDuringResponseBuildingAfterException()
         {
             var webhostBuilder = Program.CreateHostBuilder();
             var mockRepository = new Mock<IDomainEventRepository>();
+            mockRepository.Setup(x => x.LogDomainEvent(It.IsAny<DomainEvent>()));
             webhostBuilder.ConfigureServices(services =>
             {
                 services.AddMediatRDomainEvents(Assembly.GetExecutingAssembly());
-                services.AddScoped<IDomainEventRepository>(provider => mockRepository.Object);
+                services.AddScoped(provider => mockRepository.Object);
             });
             var server = new TestServer(webhostBuilder);
             var client = server.CreateClient();
             var response = await client.GetAsync("/test/fail");
             response.IsSuccessStatusCode.Should().BeFalse();
-            
+
             mockRepository.Verify(x => x.LogDomainEvent(It.IsAny<DomainEvent>()), Times.Never);
         }
-        
+
         [Fact]
         public async Task SkippingAddDomainEventsCallYieldsErrorForUseDomainEventsCall()
         {
             var webhostBuilder = Program.CreateHostBuilder();
             var mockRepository = new Mock<IDomainEventRepository>();
-            webhostBuilder.ConfigureServices(services =>
-            {
-                services.AddScoped<IDomainEventRepository>(provider => mockRepository.Object);
-            });
+            webhostBuilder.ConfigureServices(services => { services.AddScoped(provider => mockRepository.Object); });
             var server = new TestServer(webhostBuilder);
             var client = server.CreateClient();
             Func<Task> startup = async () => await client.GetAsync("/test/fail");
@@ -71,7 +70,8 @@ namespace Tests.Foundations.Events.MediatR
                 .And
                 .Message
                 .Should()
-                .Be($"Unable to resolve service for type '{typeof(IDomainEventManager)}' while attempting to Invoke middleware '{typeof(DomainMiddleware)}'.");
+                .Be(
+                    $"Unable to resolve service for type '{typeof(IDomainEventManager)}' while attempting to Invoke middleware '{typeof(DomainMiddleware)}'.");
         }
     }
 }

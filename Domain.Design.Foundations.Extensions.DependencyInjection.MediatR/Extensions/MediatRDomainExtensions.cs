@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Reflection;
 using Domain.Design.Foundations.Events;
 using Domain.Design.Foundations.Middleware;
@@ -19,13 +20,18 @@ namespace Domain.Design.Foundations.Extensions
         /// <param name="assemblies"><see cref="Assembly"/> references to send to MediatR for registering any pertinent
         /// implementations for defining events or handling events</param>
         /// <returns></returns>
-        public static IServiceCollection AddMediatRDomainEvents(this IServiceCollection services, params Assembly[] assemblies)
+        public static IServiceCollection AddMediatRDomainEvents(
+            this IServiceCollection services,
+            params Assembly[] assemblies
+        )
         {
             // Add the domain event manager implementation
             services.AddDomainEvents<MediatRDomainEventManager>();
 
             // Register all applicable assemblies to handle generated events
-            services.AddMediatR(assemblies);
+            var registeredAssemblies = new List<Assembly>(assemblies);
+            registeredAssemblies.Add(Assembly.GetAssembly(typeof(MediatRDomainExtensions)));
+            services.AddMediatR(registeredAssemblies.ToArray());
 
             return services;
         }
